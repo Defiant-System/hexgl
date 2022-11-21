@@ -1,0 +1,12 @@
+<MenuBar>
+	<Menu name="HexGL">
+		<Menu name="About HexGL" shell="win -a"/>
+		<Menu type="divider"/>
+		<Menu name="Quit HexGL" shell="win -c"/>
+	</Menu>
+	<Menu name="Help">
+		<Menu name="Help" click="open-help"/>
+		<Menu type="divider"/>
+		<Menu name="License"/>
+	</Menu>
+</MenuBar>

@@ -1,0 +1,120 @@
+
+content {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-family: BebasNeueRegular, Arial, sans-serif;
+	font-size: 23px;
+
+	&.show-start {
+		> div.view-start {
+			display: block;
+		}
+	}
+
+	> div[class*="view-"],
+	> div[class^="view-"] {
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+
+	.view-start {
+		.global {
+			position: absolute;
+			top: -11px;
+			bottom: -11px;
+			right: 0;
+			left: 0;
+			z-index: 1;
+			background: url(~/img/bg.jpg) no-repeat 50% 50% fixed;
+			animation: animbg 3s 250ms ease-in-out infinite;
+		}
+
+		.title {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+			z-index: 2;
+			background: url(~/img/title.png) no-repeat 50% 0%;
+			background-size: 67% auto;
+			animation: anim 3s ease-in-out infinite;
+		}
+
+		.menu {
+			position: absolute;
+			top: auto;
+			right: 0;
+			left: 0;
+			bottom: 5%;
+			z-index: 3;
+			font-size: 27px;
+			text-align: center;
+			text-transform: uppercase;
+			color: #4190bb;
+
+			> div {
+				width: 420px;
+				height: 37px;
+				padding-top: 7px;
+				margin: 0 auto 7px;
+				text-shadow: 0 0 11px #fff;
+				background: -webkit-gradient( linear, left top, right top,
+					color-stop(0%,rgba(255,255,255,0)),
+					color-stop(40%,rgba(255,255,255,0.5)),
+					color-stop(60%,rgba(255,255,255,0.5)),
+					color-stop(100%,rgba(255,255,255,0))
+				);
+				cursor: pointer;
+				transition: all 120ms ease-in-out;
+
+				&.start {
+					color: #f66439;
+					font-size: 37px;
+					height: 45px;
+					
+					&:hover {
+						font-size: 43px;
+					}
+				}
+
+				&:hover {
+					color: #f8854b;
+					transform: scaleY(1.1);
+					font-size: 29px;
+				}
+			}
+		}
+	}
+}
+
+
+@keyframes anim {
+	0%   { transform: translateY(7px) }
+	50%  { transform: translateY(-7px) }
+	100% { transform: translateY(7px) }
+}
+
+@keyframes animbg {
+	0%   { transform: translateY(3px) }
+	50%  { transform: translateY(-3px) }
+	100% { transform: translateY(3px) }
+}
+
+
+// custom fonts
+@font-face {
+	font-family: "BebasNeueRegular";
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url(~/fonts/BebasNeue-webfont.woff) format("woff2");
+}
+
