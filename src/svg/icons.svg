@@ -1,17 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0">
 
-	<svg id="icon-chevron-left" viewBox="0 0 13 13">
+	<svg id="icon-arrow-left" viewBox="0 0 51 51">
 		<style type="text/css">
-			.st0{fill:#333;}
+			.st0{fill:#000;}
 		</style>
-		<polygon class="st0" points="9.2,1.6 8.5,0.8 3.5,5.8 3.5,5.8 2.8,6.5 3.5,7.2 8.5,12.2 9.2,11.4 4.2,6.5 "/>
+		<polygon class="st0" points="41,21 2,4 12,21 2,39 "/>
 	</svg>
 
-	<svg id="icon-chevron-right" viewBox="0 0 13 13">
+	<svg id="icon-arrow-right" viewBox="0 0 51 51">
 		<style type="text/css">
-			.st0{fill:#333;}
+			.st0{fill:#000;}
 		</style>
-		<polygon class="st0" points="2.8,11.4 3.5,12.2 8.5,7.2 8.5,7.2 9.2,6.5 8.5,5.8 3.5,0.8 2.8,1.6 7.8,6.5 "/>
+		<polygon class="st0" points="2,22 41,39 31,22 41,4 "/>
+	</svg>
+
+	<svg id="icon-arrow-up" viewBox="0 0 51 51">
+		<style type="text/css">
+			.st0{fill:#000;}
+		</style>
+		<polygon class="st0" points="21,2 4,41 21,31 39,41 "/>
 	</svg>
 
 </svg>

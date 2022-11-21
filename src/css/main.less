@@ -7,8 +7,14 @@ content {
 	bottom: 0;
 	font-family: BebasNeueRegular, Arial, sans-serif;
 	font-size: 27px;
+	font-weight: 100;
+	text-align: center;
 
 	&.show-start > div.view-start {
+		display: block;
+	}
+
+	&.show-credits > div.view-credits {
 		display: block;
 	}
 
@@ -24,6 +30,15 @@ content {
 		left: 0;
 		right: 0;
 		bottom: 0;
+	}
+
+	.click-to-continue {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 3%;
+		font-size: 37px;
+		color: #aaa;
 	}
 
 	.view-start {
@@ -58,7 +73,6 @@ content {
 			bottom: 5%;
 			z-index: 3;
 			font-size: 27px;
-			text-align: center;
 			text-transform: uppercase;
 			color: #4190bb;
 
@@ -96,6 +110,25 @@ content {
 		}
 	}
 
+	.view-credits {
+		background: #000;
+		color: #fff;
+		padding-top: 13px;
+		font-size: 22px;
+
+		h2 {
+			color: #f90;
+			margin-top: 5px;
+			font-size: 30px;
+		}
+
+		h3 {
+			color: #bbb;
+			margin: 29px 0 7px;
+			font-size: 24px;
+		}
+	}
+
 	.view-pre-game {
 		background: #000;
 		color: #fff;
@@ -119,9 +152,9 @@ content {
 
 				h2 {
 					flex: 1;
-					padding: 5px 0 0 3px;
+					padding: 6px 0 0 7px;
+					text-align: left;
 					font-size: 47px;
-					font-weight: 100;
 				}
 			}
 		}
@@ -137,16 +170,13 @@ content {
 			padding-top: 5px;
 			font-size: 48px;
 			margin: 0 7px 0 0;
-		}
+			background-position: 7px 7px;
+			background-size: 43px 43px;
+			background-repeat: no-repeat;
 
-		.click-to-continue {
-			position: absolute;
-			left: 0;
-			right: 0;
-			bottom: 7%;
-			font-size: 37px;
-			text-align: center;
-			color: #aaa;
+			&.icon-arrow-left  { background-image: url(~/icons/icon-arrow-left.png); }
+			&.icon-arrow-right { background-image: url(~/icons/icon-arrow-right.png); }
+			&.icon-arrow-up    { background-image: url(~/icons/icon-arrow-up.png); }
 		}
 	}
 }
