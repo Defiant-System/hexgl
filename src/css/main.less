@@ -6,12 +6,14 @@ content {
 	right: 0;
 	bottom: 0;
 	font-family: BebasNeueRegular, Arial, sans-serif;
-	font-size: 23px;
+	font-size: 27px;
 
-	&.show-start {
-		> div.view-start {
-			display: block;
-		}
+	&.show-start > div.view-start {
+		display: block;
+	}
+
+	&.show-pre-game > div.view-pre-game {
+		display: block;
 	}
 
 	> div[class*="view-"],
@@ -91,6 +93,60 @@ content {
 					font-size: 29px;
 				}
 			}
+		}
+	}
+
+	.view-pre-game {
+		background: #000;
+		color: #fff;
+
+		.instructions {
+			position: absolute;
+			top: 31%;
+			left: 0;
+			right: 0;
+
+			.row {
+				// background: rgba(255,255,255,.1);
+				margin: 5px auto;
+				width: 320px;
+				display: flex;
+
+				> div {
+					width: 130px;
+					text-align: right;
+				}
+
+				h2 {
+					flex: 1;
+					padding: 5px 0 0 3px;
+					font-size: 47px;
+					font-weight: 100;
+				}
+			}
+		}
+
+		.key {
+			background: #fff;
+			color: #000;
+			display: inline-block;
+			width: 51px;
+			height: 51px;
+			border-radius: 9px;
+			text-align: center;
+			padding-top: 5px;
+			font-size: 48px;
+			margin: 0 7px 0 0;
+		}
+
+		.click-to-continue {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 7%;
+			font-size: 37px;
+			text-align: center;
+			color: #aaa;
 		}
 	}
 }
