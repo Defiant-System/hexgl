@@ -1,5 +1,5 @@
 
-@import "libs/Three.dev.js"
+@import "libs/Three.js"
 @import "libs/ShaderExtras.js"
 @import "libs/postprocessing/EffectComposer.js"
 @import "libs/postprocessing/RenderPass.js"
@@ -29,14 +29,13 @@
 @import "bkcore/hexgl/HexGL.js"
 
 
+@import "bkcore/Audio.js"
+
 /*
-
-bkcore/Audio.js
 launch.js
-
 */
 
-console.log( THREE );
+// console.log( THREE );
 
 
 let game;
@@ -51,7 +50,7 @@ const hexgl = {
 			cvsMain: window.find("canvas.main"),
 		};
 
-		// this.dispatch({ type: "new-game" });
+		this.dispatch({ type: "new-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -64,9 +63,9 @@ const hexgl = {
 					// document: document,
 					width: window.innerWidth,
 					height: window.innerHeight,
-					container: Self.els.cvsMain,
-					overlay: Self.els.cvsOverlay,
-					gameover: Self.els.gameOver,
+					container: Self.els.cvsMain[0],
+					overlay: Self.els.cvsOverlay[0],
+					gameover: Self.els.gameOver[0],
 					track: "Cityscape",
 					controlType: 0,
 					difficulty: 0,
@@ -74,6 +73,17 @@ const hexgl = {
 					godmode: 1,
 					hud: 1,
 				});
+
+				game.load({
+					onLoad: function() {
+						console.log('LOADED.');
+						game.init();
+						// $('step-3').style.display = 'none';
+						// $('step-4').style.display = 'block';
+						return game.start();
+					}
+				});
+
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

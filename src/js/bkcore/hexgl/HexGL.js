@@ -17,7 +17,7 @@ bkcore.hexgl.HexGL = function(opts)
 
 	this.document = opts.document || document;
 
-	this.a = window.location.href;
+	this.a = "~/"; // window.location.href;
 
 	this.active = true;
 	this.displayHUD = opts.hud == undefined ? true : opts.hud;
