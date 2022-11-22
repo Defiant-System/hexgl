@@ -20,20 +20,8 @@ class HexGL {
 		this.mode = opts.mode == undefined ? 'timeattack' : opts.mode;
 		this.controlType = opts.controlType == undefined ? 1 : opts.controlType;
 		
-		// 0 == low, 1 == mid, 2 == high, 3 == very high
-		// the old platform+quality combinations map to these new quality values
-		// as follows:
-		// mobile + low quality => 0 (LOW)
-		// mobile + mid quality OR desktop + low quality => 1 (MID)
-		// mobile + high quality => 2 (HIGH)
 		// desktop + mid or high quality => 3 (VERY HIGH)
 		this.quality = opts.quality == undefined ? 3 : opts.quality;
-
-		if (this.quality === 0) {
-			this.width /= 2;
-			this.height /=2;
-		}
-
 		this.settings = null;
 		this.renderer = null;
 		this.manager = null;
@@ -63,15 +51,8 @@ class HexGL {
 
 	start() {
 		this.manager.setCurrent("game");
-		this.raf();
+		this.resume();
 		this.initGameplay();
-	}
-
-	raf() {
-		if (this.active) {
-			requestAnimationFrame(this.raf.bind(this));
-			this.update();
-		}
 	}
 
 	pause() {
@@ -80,7 +61,12 @@ class HexGL {
 
 	resume() {
 		this.active = true;
-		this.raf();
+		var self = this,
+			raf = function() {
+				if (self && self.active) requestAnimationFrame( raf );
+				self.update();
+			};
+		raf();
 	}
 
 	reset() {
