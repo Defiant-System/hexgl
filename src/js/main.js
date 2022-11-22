@@ -54,11 +54,11 @@ const hexgl = {
 		this.els = els;
 
 		// temp
-		// this.dispatch({ type: "show-game" });
+		this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
-			Keys = game.components.shipControls,
+			Controls = game.components.shipControls,
 			el;
 		// console.log(event);
 		switch (event.type) {
@@ -74,24 +74,28 @@ const hexgl = {
 					case 77: // m - mute
 						break;
 					case 80: // p - pause
-						// game.pause = !game.pause;
-						console.log(game.pause);
+						if (game.active) {
+							Controls.speed = 0;
+							game.pause();
+						} else {
+							game.resume();
+						}
 						break;
 					case 37: // left
-						Keys.key.left = true;
+						Controls.key.left = true;
 						break;
 					case 65: // a
-						Keys.key.ltrigger = true;
+						Controls.key.ltrigger = true;
 						break;
 					case 39: // right
-						Keys.key.right = true;
+						Controls.key.right = true;
 						break;
 					case 68: // d
-						Keys.key.rtrigger = true;
+						Controls.key.rtrigger = true;
 						break;
 					case 38: // up
 					case 87: // w
-						Keys.key.forward = true;
+						Controls.key.forward = true;
 						break;
 				}
 				break;
@@ -99,20 +103,20 @@ const hexgl = {
 				// keyboard controls; UP state
 				switch (event.keyCode) {
 					case 37: // left
-						Keys.key.left = false;
+						Controls.key.left = false;
 						break;
 					case 65: // a
-						Keys.key.ltrigger = false;
+						Controls.key.ltrigger = false;
 						break;
 					case 39: // right
-						Keys.key.right = false;
+						Controls.key.right = false;
 						break;
 					case 68: // d
-						Keys.key.rtrigger = false;
+						Controls.key.rtrigger = false;
 						break;
 					case 38: // up
 					case 87: // w
-						Keys.key.forward = false;
+						Controls.key.forward = false;
 						break;
 				}
 				break;
