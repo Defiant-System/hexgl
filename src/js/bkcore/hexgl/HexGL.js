@@ -23,14 +23,10 @@ bkcore.hexgl.HexGL = function(opts)
 	this.displayHUD = opts.hud == undefined ? true : opts.hud;
 	this.width = opts.width == undefined ? window.innerWidth : opts.width;
 	this.height = opts.height == undefined ? window.innerHeight : opts.height;
-	
 	this.difficulty = opts.difficulty == undefined ? 0 : opts.difficulty;
 	this.player = opts.player == undefined ? "Anonym" : opts.player;
-
 	this.track = bkcore.hexgl.tracks[ opts.track == undefined ? 'Cityscape' : opts.track ];
-
 	this.mode = opts.mode == undefined ? 'timeattack' : opts.mode;
-
 	this.controlType = opts.controlType == undefined ? 1 : opts.controlType;
 	
 	// 0 == low, 1 == mid, 2 == high, 3 == very high
@@ -63,13 +59,9 @@ bkcore.hexgl.HexGL = function(opts)
 	this.containers = {};
 	this.containers.main = opts.container == undefined ? document.body : opts.container;
 	this.containers.overlay = opts.overlay == undefined ? document.body : opts.overlay;
-
 	this.gameover = opts.gameover == undefined ? null : opts.gameover;
-
 	this.godmode = opts.godmode == undefined ? false : opts.godmode;
-
 	this.hud = null;
-
 	this.gameplay = null;
 
 	this.composers = {
@@ -86,7 +78,7 @@ bkcore.hexgl.HexGL = function(opts)
 		}
 	}
 
-	this.document.addEventListener('keydown', onKeyPress, false);
+	// this.document.addEventListener('keydown', onKeyPress, false);
 }
 
 bkcore.hexgl.HexGL.prototype.start = function()
@@ -113,16 +105,18 @@ bkcore.hexgl.HexGL.prototype.reset = function()
 	this.manager.get('game').objects.lowFPS = 0;
 	this.gameplay.start();
 
-	bkcore.Audio.stop('bg');
-	bkcore.Audio.stop('wind');
-	bkcore.Audio.volume('wind', 0.35);
-	bkcore.Audio.play('bg');
-	bkcore.Audio.play('wind');
+	// bkcore.Audio.stop('bg');
+	// bkcore.Audio.stop('wind');
+	// bkcore.Audio.volume('wind', 0.35);
+	// bkcore.Audio.play('bg');
+	// bkcore.Audio.play('wind');
 }
 
 bkcore.hexgl.HexGL.prototype.restart = function()
 {
-	try{ this.document.getElementById('finish').style.display = 'none'; }
+	try{
+		// this.document.getElementById('finish').style.display = 'none';
+	}
 	catch(e){};
 	this.reset();
 }
@@ -173,9 +167,9 @@ bkcore.hexgl.HexGL.prototype.initGameplay = function()
 
 	this.gameplay.start();
 
-	bkcore.Audio.play('bg');
-	bkcore.Audio.play('wind');
-	bkcore.Audio.volume('wind', 0.35);
+	// bkcore.Audio.play('bg');
+	// bkcore.Audio.play('wind');
+	// bkcore.Audio.volume('wind', 0.35);
 }
 
 bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)

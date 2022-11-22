@@ -25,37 +25,36 @@
 
 @import "bkcore/hexgl/tracks/Cityscape.js"
 @import "bkcore/hexgl/HexGL.js"
-@import "bkcore/Audio.js"
 
 
-let game;
+let els = {
+		content: window.find("content"),
+		gameOver: window.find(".game-over"),
+		overlay: window.find(".overlay"),
+		main: window.find(".main"),
+	},
+	game = new bkcore.hexgl.HexGL({
+		// document: document,
+		width: window.innerWidth,
+		height: window.innerHeight,
+		container: els.main[0],
+		overlay: els.overlay[0],
+		gameover: els.gameOver[0],
+		track: "Cityscape",
+		controlType: 0,
+		difficulty: 0,
+		quality: 3,
+		godmode: 1,
+		hud: 1,
+	});
 
 const hexgl = {
 	init() {
 		// fast references
-		this.els = {
-			content: window.find("content"),
-			gameOver: window.find(".game-over"),
-			overlay: window.find(".overlay"),
-			main: window.find(".main"),
-		};
-
-		game = new bkcore.hexgl.HexGL({
-			// document: document,
-			width: window.innerWidth,
-			height: window.innerHeight,
-			container: this.els.main[0],
-			overlay: this.els.overlay[0],
-			gameover: this.els.gameOver[0],
-			track: "Cityscape",
-			controlType: 0,
-			difficulty: 0,
-			quality: 3,
-			godmode: 1,
-			hud: 1,
-		});
-
-		// this.dispatch({ type: "new-game" });
+		this.els = els;
+		
+		// temp
+		this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
