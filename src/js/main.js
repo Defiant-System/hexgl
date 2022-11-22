@@ -40,6 +40,21 @@ const hexgl = {
 			main: window.find(".main"),
 		};
 
+		game = new bkcore.hexgl.HexGL({
+			// document: document,
+			width: window.innerWidth,
+			height: window.innerHeight,
+			container: this.els.main[0],
+			overlay: this.els.overlay[0],
+			gameover: this.els.gameOver[0],
+			track: "Cityscape",
+			controlType: 0,
+			difficulty: 0,
+			quality: 3,
+			godmode: 1,
+			hud: 1,
+		});
+
 		// this.dispatch({ type: "new-game" });
 	},
 	dispatch(event) {
@@ -59,21 +74,6 @@ const hexgl = {
 				break;
 			case "show-game":
 				Self.els.content.prop({ className: event.type });
-
-				game = new bkcore.hexgl.HexGL({
-					// document: document,
-					width: window.innerWidth,
-					height: window.innerHeight,
-					container: Self.els.main[0],
-					overlay: Self.els.overlay[0],
-					gameover: Self.els.gameOver[0],
-					track: "Cityscape",
-					controlType: 0,
-					difficulty: 0,
-					quality: 3,
-					godmode: 1,
-					hud: 1,
-				});
 
 				game.load({
 					onLoad: function() {
