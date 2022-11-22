@@ -7,7 +7,6 @@
 @import "libs/postprocessing/ShaderPass.js"
 @import "libs/postprocessing/MaskPass.js"
 
-
 @import "bkcore/threejs/RenderManager.js"
 @import "bkcore/threejs/Shaders.js"
 @import "bkcore/threejs/Particles.js"
@@ -16,7 +15,6 @@
 @import "bkcore/Timer.js"
 @import "bkcore/ImageData.js"
 @import "bkcore/Utils.js"
-
 
 @import "bkcore/hexgl/HUD.js"
 @import "bkcore/hexgl/RaceData.js"
@@ -27,15 +25,7 @@
 
 @import "bkcore/hexgl/tracks/Cityscape.js"
 @import "bkcore/hexgl/HexGL.js"
-
-
 @import "bkcore/Audio.js"
-
-/*
-launch.js
-*/
-
-// console.log( THREE );
 
 
 let game;
@@ -46,25 +36,36 @@ const hexgl = {
 		this.els = {
 			content: window.find("content"),
 			gameOver: window.find(".game-over"),
-			cvsOverlay: window.find("canvas.overlay"),
-			cvsMain: window.find("canvas.main"),
+			overlay: window.find(".overlay"),
+			main: window.find(".main"),
 		};
 
-		this.dispatch({ type: "new-game" });
+		// this.dispatch({ type: "new-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
 			el;
 		switch (event.type) {
-			case "window.init":
+			case "set-quality":
 				break;
-			case "new-game":
+			case "toggle-hud":
+				break;
+			case "toggle-god-mode":
+				break;
+			case "show-pre-game":
+			case "show-credits":
+			case "show-start":
+				Self.els.content.prop({ className: event.type });
+				break;
+			case "show-game":
+				Self.els.content.prop({ className: event.type });
+
 				game = new bkcore.hexgl.HexGL({
 					// document: document,
 					width: window.innerWidth,
 					height: window.innerHeight,
-					container: Self.els.cvsMain[0],
-					overlay: Self.els.cvsOverlay[0],
+					container: Self.els.main[0],
+					overlay: Self.els.overlay[0],
 					gameover: Self.els.gameOver[0],
 					track: "Cityscape",
 					controlType: 0,
@@ -78,12 +79,9 @@ const hexgl = {
 					onLoad: function() {
 						console.log('LOADED.');
 						game.init();
-						// $('step-3').style.display = 'none';
-						// $('step-4').style.display = 'block';
 						return game.start();
 					}
 				});
-
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

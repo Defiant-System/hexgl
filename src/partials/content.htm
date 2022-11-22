@@ -1,18 +1,18 @@
-<content class="show-game">
+<content class="show-start">
 	<div class="view-start">
 		<div class="global"></div>
 		<div class="title"></div>
 		<div class="menu">
-			<div class="start">Start</div>
-			<!-- <div class="control-type">Controls: Keyboard</div> -->
-			<div class="quality">Quality: Very Hight</div> <!-- Low, Mid, High, Very High --> 
-			<!-- <div class="hud">Hud: On</div> -->
-			<div class="god-mode">Godmode: OFF</div>
-			<div class="credits">Credits</div>
+			<div class="start" data-click="show-pre-game">Start</div>
+			<!-- <div class="control-type">Controls: Keyboard</div>
+			<div class="quality" data-click="set-quality">Quality: Very High</div>
+			<div class="god-mode" data-click="toggle-god-mode">Godmode: OFF</div> -->
+			<div class="hud" data-click="toggle-hud">Hud: On</div>
+			<div class="credits" data-click="show-credits">Credits</div>
 		</div>
 	</div>
 
-	<div class="view-credits">
+	<div class="view-credits" data-click="show-start">
 		<h3>Code</h3>
 		<div>
 			<h2>Concept and Development</h3>
@@ -42,7 +42,7 @@
 		<div class="click-to-continue">Click to continue</div>
 	</div>
 
-	<div class="view-pre-game">
+	<div class="view-pre-game" data-click="show-game">
 		<div class="instructions">
 			<div class="row">
 				<div>
@@ -69,8 +69,8 @@
 	</div>
 
 	<div class="view-game">
-		<canvas class="overlay"></canvas>
-		<canvas class="main"></canvas>
+		<div class="main"></div>
+		<div class="overlay"></div>
 	</div>
 
 	<div class="view-game-over">

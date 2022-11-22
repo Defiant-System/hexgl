@@ -212,7 +212,7 @@ bkcore.threejs.Loader.prototype.loadAnalyser = function(name, url)
 {
 	var self = this;
 	this.updateState("analysers", name, false);
-	this.data.analysers[name] = new bkcore.ImageData(
+	this.data.analysers[name] = new window.bkcore.ImageData(
 		url, 
 		function(){ 
 			self.updateState("analysers", name, true);
@@ -234,27 +234,27 @@ bkcore.threejs.Loader.prototype.loadImage = function(name, url)
 }
 
 bkcore.threejs.Loader.prototype.loadSound = function(src, name, loop){
-    var self = this;
-    this.updateState("sounds", name, false);
-    
-    bkcore.Audio.addSound(
-    	src,
-    	name, 
-    	loop, 
-    	function(){
-       	 self.updateState("sounds", name, true);
-    	}
-    );
-    
-    this.data.sounds[name] = {
-        play: function(){
-            bkcore.Audio.play(name);
-        },
-        stop: function(){
-            bkcore.Audio.stop(name);
-        },
-        volume: function(vol){
-            bkcore.Audio.volume(name, vol);
-        }
-    };
+	var self = this;
+	this.updateState("sounds", name, false);
+	
+	bkcore.Audio.addSound(
+		src,
+		name, 
+		loop, 
+		function(){
+			self.updateState("sounds", name, true);
+		}
+	);
+	
+	this.data.sounds[name] = {
+		play: function(){
+			bkcore.Audio.play(name);
+		},
+		stop: function(){
+			bkcore.Audio.stop(name);
+		},
+		volume: function(vol){
+			bkcore.Audio.volume(name, vol);
+		}
+	};
 };

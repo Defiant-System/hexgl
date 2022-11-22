@@ -241,10 +241,10 @@
 		@package bkcore
 	 */
 
-	exports = exports != null ? exports : this;
+	// exports = exports != null ? exports : this;
+	// exports.bkcore || (exports.bkcore = {});
+	// exports.bkcore.Utils = Utils;
 
-	exports.bkcore || (exports.bkcore = {});
-
-	exports.bkcore.Utils = Utils;
+	bkcore.Utils = Utils;
 
 }).call(this);

@@ -150,10 +150,10 @@
 	*/
 
 
-	exports = exports != null ? exports : this;
+	// exports = exports != null ? exports : this;
+	// exports.bkcore || (exports.bkcore = {});
+	// exports.bkcore.Timer = Timer;
 
-	exports.bkcore || (exports.bkcore = {});
-
-	exports.bkcore.Timer = Timer;
+	bkcore.Timer = Timer;
 
 }).call(this);

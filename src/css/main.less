@@ -44,9 +44,10 @@ content {
 		position: absolute;
 		left: 0;
 		right: 0;
-		bottom: 3%;
+		bottom: 5%;
 		font-size: 37px;
 		color: #aaa;
+		cursor: pointer;
 	}
 
 	.view-start {
@@ -69,7 +70,7 @@ content {
 			left: 0;
 			z-index: 2;
 			background: url(~/img/title.png) no-repeat 50% 0%;
-			background-size: 67% auto;
+			background-size: 79% auto;
 			animation: anim 3s ease-in-out infinite;
 		}
 
@@ -78,7 +79,7 @@ content {
 			top: auto;
 			right: 0;
 			left: 0;
-			bottom: 5%;
+			bottom: 3%;
 			z-index: 3;
 			font-size: 27px;
 			text-transform: uppercase;
@@ -189,8 +190,10 @@ content {
 	}
 
 	.view-game {
-		canvas {
+		> div {
 			position: absolute;
+			top: 0;
+			left: 0;
 			width: 100%;
 			height: 100%;
 			pointer-events: none;
