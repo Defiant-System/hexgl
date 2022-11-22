@@ -15,9 +15,9 @@ bkcore.hexgl.HexGL = function(opts)
 {
 	var self = this;
 
-	this.document = opts.document || document;
+	// this.document = opts.document || document;
 
-	this.a = "~/"; // window.location.href;
+	// this.a = "~/"; // window.location.href;
 
 	this.active = true;
 	this.displayHUD = opts.hud == undefined ? true : opts.hud;
@@ -98,6 +98,14 @@ bkcore.hexgl.HexGL.prototype.start = function()
 		raf();
 
 	this.initGameplay();
+}
+
+bkcore.hexgl.HexGL.prototype.pause = function() {
+	console.log("pause");
+}
+
+bkcore.hexgl.HexGL.prototype.resume = function() {
+	console.log("resume");
 }
 
 bkcore.hexgl.HexGL.prototype.reset = function()

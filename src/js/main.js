@@ -34,7 +34,6 @@ let els = {
 		main: window.find(".main"),
 	},
 	game = new bkcore.hexgl.HexGL({
-		// document: document,
 		width: window.innerWidth,
 		height: window.innerHeight,
 		container: els.main[0],
@@ -45,7 +44,7 @@ let els = {
 		difficulty: 0,
 		quality: 3,
 		godmode: 0,
-		hud: 0,
+		hud: 1,
 	});
 
 
@@ -69,7 +68,12 @@ const hexgl = {
 			case "window.keystroke":
 				// keyboard controls; DOWN state
 				switch (event.keyCode) {
+					case 27: // escape
+						game.reset();
+						break;
 					case 77: // m - mute
+						break;
+					case 80: // p - pause
 						break;
 					case 37: // left
 						Keys.key.left = true;
@@ -125,9 +129,10 @@ const hexgl = {
 
 				game.load({
 					onLoad: function() {
-						console.log('LOADED.');
 						game.init();
-						return game.start();
+						game.start();
+
+						console.log( game );
 					}
 				});
 				break;
