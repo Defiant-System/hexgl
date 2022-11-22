@@ -24,6 +24,7 @@ bkcore.threejs.Loader = function(opts)
 	var self = this;
 
 	this.jsonLoader = new THREE.JSONLoader();
+	console.log( this.jsonLoader );
 
 	this.errorCallback = opts.onError == undefined ? function(s){ console.warn("Error while loading %s.".replace("%s", s)) } : opts.onError;
 	this.loadCallback = opts.onLoad == undefined ? function(){ console.log("Loaded.") } : opts.onLoad;
@@ -46,6 +47,8 @@ bkcore.threejs.Loader = function(opts)
 		this.data[t] = {};
 		this.states[t] = {};
 	}
+
+	this.data.geometries = geometries;
 
 	this.progress = {
 		total: 0,
@@ -81,8 +84,8 @@ bkcore.threejs.Loader.prototype.load = function(data)
 	for(var c in data.texturesCube)
 		this.loadTextureCube(c, data.texturesCube[c]);
 
-	for(var g in data.geometries)
-		this.loadGeometry(g, data.geometries[g]);
+	// for(var g in data.geometries)
+	// 	this.loadGeometry(g, data.geometries[g]);
 
 	for(var a in data.analysers)
 		this.loadAnalyser(a, data.analysers[a]);

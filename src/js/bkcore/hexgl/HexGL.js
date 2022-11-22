@@ -16,8 +16,8 @@ class HexGL {
 		this.height = opts.height == undefined ? window.innerHeight : opts.height;
 		this.difficulty = opts.difficulty == undefined ? 0 : opts.difficulty;
 		this.player = opts.player == undefined ? "Anonym" : opts.player;
-		this.track = bkcore.hexgl.tracks[ opts.track == undefined ? 'Cityscape' : opts.track ];
-		this.mode = opts.mode == undefined ? 'timeattack' : opts.mode;
+		this.track = bkcore.hexgl.tracks[ opts.track == undefined ? "Cityscape" : opts.track ];
+		this.mode = opts.mode == undefined ? "timeattack" : opts.mode;
 		this.controlType = opts.controlType == undefined ? 1 : opts.controlType;
 		
 		// desktop + mid or high quality => 3 (VERY HIGH)
@@ -70,7 +70,7 @@ class HexGL {
 	}
 
 	reset() {
-		this.manager.get('game').objects.lowFPS = 0;
+		this.manager.get("game").objects.lowFPS = 0;
 		this.gameplay.start();
 	}
 
@@ -182,21 +182,21 @@ class HexGL {
 		var renderModel = new THREE.RenderPass( this.manager.get("game").scene, this.manager.get("game").camera );
 		renderModel.clear = false;
 
-		this.composers.game = new THREE.EffectComposer( this.renderer, renderTarget );
-
 		var effectHex = new THREE.ShaderPass( bkcore.threejs.Shaders[ "hexvignette" ] );
-		effectHex.uniforms[ 'size' ].value = 512.0 * (this.width/1633);
-		effectHex.uniforms[ 'rx' ].value = this.width;
-		effectHex.uniforms[ 'ry' ].value = this.height;
-		effectHex.uniforms[ 'tHex' ].texture = this.track.lib.get("textures", "hex");
-		effectHex.uniforms[ 'color' ].value = this.extras.vignetteColor;
+		effectHex.uniforms[ "size" ].value = 512.0 * (this.width/1633);
+		effectHex.uniforms[ "rx" ].value = this.width;
+		effectHex.uniforms[ "ry" ].value = this.height;
+		effectHex.uniforms[ "tHex" ].texture = this.track.lib.get("textures", "hex");
+		effectHex.uniforms[ "color" ].value = this.extras.vignetteColor;
 		effectHex.renderToScreen = true;
 
+		var effectBloom = new THREE.BloomPass( 0.8, 25, 4, 256);
+
+		this.composers.game = new THREE.EffectComposer( this.renderer, renderTarget );
 		this.composers.game.addPass( renderSky );
 		this.composers.game.addPass( renderModel );
 
 		// desktop + quality mid or high
-		var effectBloom = new THREE.BloomPass( 0.8, 25, 4 , 256);
 		this.composers.game.addPass( effectBloom );
 		this.extras.bloom = effectBloom;
 

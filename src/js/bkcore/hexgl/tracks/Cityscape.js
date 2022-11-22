@@ -71,17 +71,6 @@ bkcore.hexgl.tracks.Cityscape = {
 			texturesCube: {
 				'skybox.dawnclouds'					: "~/textures.full/skybox/dawnclouds/%1.jpg"
 			},
-			geometries: {
-				'bonus.base'						: "~/geometries/bonus/base/base.js",
-				'booster'							: "~/geometries/booster/booster.js",
-				'ship.feisar'						: "~/geometries/ships/feisar/feisar.js",
-				'track.cityscape'					: "~/geometries/tracks/cityscape/track.js",
-				'track.cityscape.scrapers1'			: "~/geometries/tracks/cityscape/scrapers1.js",
-				'track.cityscape.scrapers2'			: "~/geometries/tracks/cityscape/scrapers2.js",
-				'track.cityscape.start'				: "~/geometries/tracks/cityscape/start.js",
-				'track.cityscape.start.banner'		: "~/geometries/tracks/cityscape/startbanner.js",
-				'track.cityscape.bonus.speed'		: "~/geometries/tracks/cityscape/bonus/speed.js"
-			},
 			analysers: {
 				'track.cityscape.collision'			: "~/textures.full/tracks/cityscape/collision.png",
 				'track.cityscape.height'			: "~/textures.full/tracks/cityscape/height.png"

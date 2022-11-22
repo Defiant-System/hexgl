@@ -1,4 +1,16 @@
 
+let geometries = {
+		"bonus.base"					: @import "geometries/bonus/base/base.js",
+		"booster"						: @import "geometries/booster/booster.js",
+		"ship.feisar"					: @import "geometries/ships/feisar/feisar.js",
+		"track.cityscape"				: @import "geometries/tracks/cityscape/track.js",
+		"track.cityscape.scrapers1"		: @import "geometries/tracks/cityscape/scrapers1.js",
+		"track.cityscape.scrapers2"		: @import "geometries/tracks/cityscape/scrapers2.js",
+		"track.cityscape.start"			: @import "geometries/tracks/cityscape/start.js",
+		"track.cityscape.start.banner"	: @import "geometries/tracks/cityscape/startbanner.js",
+		"track.cityscape.bonus.speed"	: @import "geometries/tracks/cityscape/bonus/speed.js"
+	};
+
 @import "libs/Three.dev.js"
 @import "libs/ShaderExtras.js"
 @import "libs/postprocessing/EffectComposer.js"
@@ -137,8 +149,6 @@ const hexgl = {
 					onLoad: function() {
 						game.init();
 						game.start();
-
-						console.log( game );
 					}
 				});
 				break;
