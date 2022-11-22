@@ -1,5 +1,5 @@
 
-@import "libs/Three.js"
+@import "libs/Three.dev.js"
 @import "libs/ShaderExtras.js"
 @import "libs/postprocessing/EffectComposer.js"
 @import "libs/postprocessing/RenderPass.js"
@@ -52,9 +52,9 @@ const hexgl = {
 	init() {
 		// fast references
 		this.els = els;
-		
+
 		// temp
-		this.dispatch({ type: "show-game" });
+		// this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
