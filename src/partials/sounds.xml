@@ -1,0 +1,7 @@
+<Sounds>
+	<i id="bg" url="~/audio/bg.ogg"/>
+	<i id="crash" url="~/audio/crash.ogg"/>
+	<i id="destroyed" url="~/audio/destroyed.ogg"/>
+	<i id="boost" url="~/audio/boost.ogg"/>
+	<i id="wind" url="~/audio/wind.ogg"/>
+</Sounds>

@@ -90,28 +90,6 @@ bkcore.hexgl.tracks.Cityscape = {
 				'hud.bg'							: "~/textures.full/hud/hud-bg.png",
 				'hud.speed'							: "~/textures.full/hud/hud-fg-speed.png",
 				'hud.shield'						: "~/textures.full/hud/hud-fg-shield.png"
-			},
-			sounds: {
-				// bg: {
-				// 	src: '~/audio/bg.ogg',
-				// 	loop: true
-				// },
-				// crash: {
-				// 	src: '~/audio/crash.ogg',
-				// 	loop: false
-				// },
-				// destroyed: {
-				// 	src: '~/audio/destroyed.ogg',
-				// 	loop: false
-				// },
-				// boost: {
-				// 	src: '~/audio/boost.ogg',
-				// 	loop: false
-				// },
-				// wind: {
-				// 	src: '~/audio/wind.ogg',
-				// 	loop: true
-				// }
 			}
 		});
 	},

@@ -44,9 +44,10 @@ let els = {
 		controlType: 0,
 		difficulty: 0,
 		quality: 3,
-		godmode: 1,
-		hud: 1,
+		godmode: 0,
+		hud: 0,
 	});
+
 
 const hexgl = {
 	init() {
@@ -54,18 +55,66 @@ const hexgl = {
 		this.els = els;
 
 		// temp
-		// this.dispatch({ type: "show-game" });
+		this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
+			Keys = game.components.shipControls,
 			el;
+		// console.log(event);
 		switch (event.type) {
-			case "set-quality":
+			case "window.init":
 				break;
-			case "toggle-hud":
+			// system events
+			case "window.keystroke":
+				// keyboard controls; DOWN state
+				switch (event.keyCode) {
+					case 77: // m - mute
+						break;
+					case 37: // left
+						Keys.key.left = true;
+						break;
+					case 65: // a
+						Keys.key.ltrigger = true;
+						break;
+					case 39: // right
+						Keys.key.right = true;
+						break;
+					case 68: // d
+						Keys.key.rtrigger = true;
+						break;
+					case 38: // up
+					case 87: // w
+						Keys.key.forward = true;
+						break;
+				}
 				break;
-			case "toggle-god-mode":
+			case "window.keyup":
+				// keyboard controls; UP state
+				switch (event.keyCode) {
+					case 37: // left
+						Keys.key.left = false;
+						break;
+					case 65: // a
+						Keys.key.ltrigger = false;
+						break;
+					case 39: // right
+						Keys.key.right = false;
+						break;
+					case 68: // d
+						Keys.key.rtrigger = false;
+						break;
+					case 38: // up
+					case 87: // w
+						Keys.key.forward = false;
+						break;
+				}
 				break;
+
+			// custom events
+			case "set-quality": break;
+			case "toggle-hud": break;
+			case "toggle-god-mode": break;
 			case "show-pre-game":
 			case "show-credits":
 			case "show-start":

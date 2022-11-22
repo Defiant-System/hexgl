@@ -158,16 +158,16 @@ bkcore.hexgl.ShipControls = function(ctx)
 	else if(ctx.controlType == 3 && bkcore.controllers.GamepadController.isCompatible())
 	{
 		this.gamepadController = new bkcore.controllers.GamepadController(
-      function(controller){
-        if (controller.select)
-          ctx.restart();
-        else
-          self.key.forward = controller.acceleration > 0;
-          self.key.ltrigger = controller.ltrigger > 0;
-          self.key.rtrigger = controller.rtrigger > 0;
-          self.key.left = controller.lstickx < -0.1;
-          self.key.right = controller.lstickx > 0.1;
-      });
+			function(controller){
+				if (controller.select)
+					ctx.restart();
+				else
+					self.key.forward = controller.acceleration > 0;
+					self.key.ltrigger = controller.ltrigger > 0;
+					self.key.rtrigger = controller.rtrigger > 0;
+					self.key.left = controller.lstickx < -0.1;
+					self.key.right = controller.lstickx > 0.1;
+			});
 	}
 	else if(ctx.controlType == 2)
 	{
@@ -225,7 +225,7 @@ bkcore.hexgl.ShipControls = function(ctx)
 		lc.on('frame', function(frame)
 		{
 			if(!lb.isConnected) return;
-		  hand = frame.hands[0];
+			hand = frame.hands[0];
 			if(typeof hand === 'undefined')
 			{
 				if(lb.hasHands)
@@ -248,48 +248,38 @@ bkcore.hexgl.ShipControls = function(ctx)
 		lc.connect();
 	}
 
-	function onKeyDown(event)
-	{
-		switch(event.keyCode)
-		{
-			case 38: /*up*/	self.key.forward = true; break;
+	// function onKeyDown(event)
+	// {
+	// 	switch(event.keyCode)
+	// 	{
+	// 		case 38: /*up*/	self.key.forward = true; break;
+	// 		case 40: /*down*/self.key.backward = true; break;
+	// 		case 37: /*left*/self.key.left = true; break;
+	// 		case 39: /*right*/self.key.right = true; break;
+	// 		case 81: /*Q*/self.key.ltrigger = true; break;
+	// 		case 65: /*A*/self.key.ltrigger = true; break;
+	// 		case 68: /*D*/self.key.rtrigger = true; break;
+	// 		case 69: /*E*/self.key.rtrigger = true; break;
+	// 	}
+	// };
 
-			case 40: /*down*/self.key.backward = true; break;
+	// function onKeyUp(event)
+	// {
+	// 	switch(event.keyCode)
+	// 	{
+	// 		case 38: /*up*/	self.key.forward = false; break;
+	// 		case 40: /*down*/self.key.backward = false; break;
+	// 		case 37: /*left*/self.key.left = false; break;
+	// 		case 39: /*right*/self.key.right = false; break;
+	// 		case 81: /*Q*/self.key.ltrigger = false; break;
+	// 		case 65: /*A*/self.key.ltrigger = false; break;
+	// 		case 68: /*D*/self.key.rtrigger = false; break;
+	// 		case 69: /*E*/self.key.rtrigger = false; break;
+	// 	}
+	// };
 
-			case 37: /*left*/self.key.left = true; break;
-
-			case 39: /*right*/self.key.right = true; break;
-
-			case 81: /*Q*/self.key.ltrigger = true; break;
-			case 65: /*A*/self.key.ltrigger = true; break;
-
-			case 68: /*D*/self.key.rtrigger = true; break;
-			case 69: /*E*/self.key.rtrigger = true; break;
-		}
-	};
-
-	function onKeyUp(event)
-	{
-		switch(event.keyCode)
-		{
-			case 38: /*up*/	self.key.forward = false; break;
-
-			case 40: /*down*/self.key.backward = false; break;
-
-			case 37: /*left*/self.key.left = false; break;
-
-			case 39: /*right*/self.key.right = false; break;
-
-			case 81: /*Q*/self.key.ltrigger = false; break;
-			case 65: /*A*/self.key.ltrigger = false; break;
-
-			case 68: /*D*/self.key.rtrigger = false; break;
-			case 69: /*E*/self.key.rtrigger = false; break;
-		}
-	};
-
-	domElement.addEventListener('keydown', onKeyDown, false);
-	domElement.addEventListener('keyup', onKeyUp, false);
+	// domElement.addEventListener('keydown', onKeyDown, false);
+	// domElement.addEventListener('keyup', onKeyUp, false);
 };
 
 bkcore.hexgl.ShipControls.prototype.control = function(threeMesh)
@@ -599,7 +589,7 @@ bkcore.hexgl.ShipControls.prototype.boosterCheck = function(dt)
 	var color = this.collisionMap.getPixel(x, z);
 
 	if(color.r == 255 && color.g < 127 && color.b < 127) {
-		// bkcore.Audio.play('boost');
+		window.audio.play("boost");
 		this.boost = this.boosterSpeed;
 	}
 
@@ -628,7 +618,7 @@ bkcore.hexgl.ShipControls.prototype.collisionCheck = function(dt)
 
 	if(collision.r < 255)
 	{
-		// bkcore.Audio.play('crash');
+		window.audio.play("crash");
 
 		// Shield
 		var sr = (this.getRealSpeed() / this.maxSpeed);

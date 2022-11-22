@@ -134,11 +134,8 @@ bkcore.hexgl.HexGL.prototype.update = function()
 bkcore.hexgl.HexGL.prototype.init = function()
 {
 	this.initHUD();
-	
 	this.track.buildMaterials(this.quality);
-
 	this.track.buildScenes(this, this.quality);
-
 	this.initGameComposer();
 }
 
@@ -164,12 +161,12 @@ bkcore.hexgl.HexGL.prototype.initGameplay = function()
 			self.displayScore(this.finishTime, this.lapTimes);
 		}
 	});
+	// temp
+	// this.gameplay.start();
 
-	this.gameplay.start();
-
-	// bkcore.Audio.play('bg');
-	// bkcore.Audio.play('wind');
-	// bkcore.Audio.volume('wind', 0.35);
+	// window.audio.play('bg');
+	// window.audio.play('wind');
+	// window.audio.volume('wind', 0.35);
 }
 
 bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
