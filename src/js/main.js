@@ -54,7 +54,7 @@ const hexgl = {
 		this.els = els;
 
 		// temp
-		this.dispatch({ type: "show-game" });
+		// this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -74,6 +74,8 @@ const hexgl = {
 					case 77: // m - mute
 						break;
 					case 80: // p - pause
+						// game.pause = !game.pause;
+						console.log(game.pause);
 						break;
 					case 37: // left
 						Keys.key.left = true;

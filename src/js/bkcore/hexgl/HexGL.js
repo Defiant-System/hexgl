@@ -38,7 +38,7 @@ bkcore.hexgl.HexGL = function(opts)
 	// desktop + mid or high quality => 3 (VERY HIGH)
 	this.quality = opts.quality == undefined ? 3 : opts.quality;
 
-	if(this.quality === 0)
+	if (this.quality === 0)
 	{
 		this.width /= 2;
 		this.height /=2;
@@ -72,8 +72,7 @@ bkcore.hexgl.HexGL = function(opts)
 
 	function onKeyPress(event)
 	{
-		if(event.keyCode == 27/*escape*/)
-		{
+		if (event.keyCode == 27/*escape*/) {
 			self.reset();
 		}
 	}
@@ -90,11 +89,11 @@ bkcore.hexgl.HexGL.prototype.start = function()
 
 	function raf()
 	{
-		if(self && self.active) requestAnimationFrame( raf );
+		if (self && self.active) requestAnimationFrame( raf );
 		self.update();
 	}
 
-	//if(this.a[15] == "o")
+	//if (this.a[15] == "o")
 		raf();
 
 	this.initGameplay();
@@ -131,9 +130,9 @@ bkcore.hexgl.HexGL.prototype.restart = function()
 
 bkcore.hexgl.HexGL.prototype.update = function()
 {
-	if(!this.active) return;
+	if (!this.active) return;
 
-	if(this.gameplay != null)
+	if (this.gameplay != null)
 		this.gameplay.update();
 
 	this.manager.renderCurrent();
@@ -188,7 +187,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 		bkcore.Timer.msToTimeString(l[2])
 	];
 
-	if(this.gameover !== null)
+	if (this.gameover !== null)
 	{
 		this.gameover.style.display = "block";
 		this.gameover.children[0].innerHTML = tf.m + "'" + tf.s + "''" + tf.ms;
@@ -212,13 +211,13 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 	var d = this.difficulty == 0 ? 'casual' : 'hard';
 	var ts = this.hud.timeSeparators;
 
-	if(this.gameplay.result == this.gameplay.results.FINISH)
+	if (this.gameplay.result == this.gameplay.results.FINISH)
 	{
 		ds != undefined && (ds.innerHTML = "Finished!");
 		// local record
-		if(typeof(Storage)!=="undefined")
+		if (typeof(Storage)!=="undefined")
 		{
-			if(localStorage['score-'+t+'-'+d] == undefined || localStorage['score-'+t+'-'+d] > f)
+			if (localStorage['score-'+t+'-'+d] == undefined || localStorage['score-'+t+'-'+d] > f)
 			{
 				dr != undefined && (dr.innerHTML = "New local record!");
 				localStorage['score-'+t+'-'+d] = f;
@@ -233,7 +232,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 		}
 		// ladder record
 		var p = bkcore.hexgl.Ladder.global[t][d][bkcore.hexgl.Ladder.global[t][d].length-2];
-		if(p != undefined && p['score'] > f)
+		if (p != undefined && p['score'] > f)
 		{
 			dh != undefined && (dh.innerHTML = "You made it to the HOF!");
 		}
@@ -271,7 +270,7 @@ bkcore.hexgl.HexGL.prototype.displayScore = function(f, l)
 
 	bkcore.hexgl.Ladder.displayLadder('finish-ladder', t, d, 8);
 
-	if(this.manager.get('game').objects.lowFPS >= 999)
+	if (this.manager.get('game').objects.lowFPS >= 999)
 		sl != undefined && (sl.innerHTML = 'Note: Your framerate was pretty low, you should try a lesser graphic setting!');
 	else
 		sl != undefined && (sl.innerHTML = '');
@@ -287,7 +286,7 @@ bkcore.hexgl.HexGL.prototype.initRenderer = function()
 	});
 
 	// desktop + quality mid or high
-	if(this.quality > 2)
+	if (this.quality > 2)
 	{
 		renderer.physicallyBasedShading = true;
 		renderer.gammaInput = true;
@@ -309,7 +308,7 @@ bkcore.hexgl.HexGL.prototype.initRenderer = function()
 
 bkcore.hexgl.HexGL.prototype.initHUD = function()
 {
-	if(!this.displayHUD) return;
+	if (!this.displayHUD) return;
 	this.hud = new bkcore.hexgl.HUD({
 		width: this.width,
 		height: this.height,
@@ -350,7 +349,7 @@ bkcore.hexgl.HexGL.prototype.initGameComposer = function()
 	this.composers.game.addPass( renderSky );
 	this.composers.game.addPass( renderModel );
 
-	// if(this.quality > 0 && !this.mobile)
+	// if (this.quality > 0 && !this.mobile)
 	// {
 	// 	var effectFXAA = new THREE.ShaderPass( THREE.ShaderExtras[ "fxaa" ] );
 	// 	effectFXAA.uniforms[ 'resolution' ].value.set( 1 / this.width, 1 / this.height );
@@ -362,7 +361,7 @@ bkcore.hexgl.HexGL.prototype.initGameComposer = function()
 	// }
 	
 	// desktop + quality mid or high
-	if(this.quality > 2)
+	if (this.quality > 2)
 	{
 		var effectBloom = new THREE.BloomPass( 0.8, 25, 4 , 256);
 
@@ -374,7 +373,7 @@ bkcore.hexgl.HexGL.prototype.initGameComposer = function()
 	// desktop + quality low, mid or high
 	// OR
 	// mobile + quality mid or high
-	if(this.quality > 0)
+	if (this.quality > 0)
 		this.composers.game.addPass( effectHex );
 	else
 		this.composers.game.addPass( effectScreen );
@@ -389,7 +388,7 @@ bkcore.hexgl.HexGL.prototype.createMesh = function(parent, geometry, x, y, z, ma
 	parent.add(mesh);
 
 	// desktop + quality mid or high
-	if(this.quality > 2)
+	if (this.quality > 2)
 	{
 		mesh.castShadow = true;
 		mesh.receiveShadow = true;
@@ -401,7 +400,7 @@ bkcore.hexgl.HexGL.prototype.createMesh = function(parent, geometry, x, y, z, ma
 bkcore.hexgl.HexGL.prototype.tweakShipControls = function()
 {
 	var c = this.components.shipControls;
-	if(this.difficulty == 1)
+	if (this.difficulty == 1)
 	{
 		c.airResist = 0.035;
 		c.airDrift = 0.07;
@@ -420,7 +419,7 @@ bkcore.hexgl.HexGL.prototype.tweakShipControls = function()
 		c.driftLerp = 0.4;
 		c.angularLerp = 0.4;
 	}
-	else if(this.difficulty == 0)
+	else if (this.difficulty == 0)
 	{
 		c.airResist = 0.02;
 		c.airDrift = 0.06;
@@ -440,6 +439,6 @@ bkcore.hexgl.HexGL.prototype.tweakShipControls = function()
 		c.angularLerp = 0.4;
 	}
 
-	if(this.godmode)
+	if (this.godmode)
 		c.shieldDamage = 0.0;
 }
