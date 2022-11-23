@@ -63,16 +63,75 @@ content {
 			animation: animbg 3s 150ms ease-in-out infinite;
 		}
 
-		.title {
+		.ship {
 			position: absolute;
-			top: 0;
+			top: 43px;
 			right: 0;
 			bottom: 0;
 			left: 0;
 			z-index: 2;
-			background: url(~/img/title.png) no-repeat 50% 0%;
-			background-size: 79% auto;
+			background: url(~/img/feisar.png) no-repeat 50% 0%;
+			filter: drop-shadow(0 0 17px #fff);
+			background-size: 67% auto;
 			animation: anim 3s ease-in-out infinite;
+		}
+
+		.title {
+			position: absolute;
+			top: 17px;
+			left: 23px;
+			font-family: Roboto, sans-serif;
+			font-size: 67px;
+			font-weight: 700;
+			font-style: italic;
+			text-align: right;
+			line-height: .925;
+			filter: drop-shadow(0 0 7px #fff);
+			z-index: 3;
+			// top: 270px;
+			// left: 312px;
+			// transform: rotate(-24deg);
+			// font-size: 56px;
+
+			span {
+				background-image: -webkit-linear-gradient(90deg, #f9884d, #f44729);
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+				-webkit-text-stroke-width: 1px;
+				-webkit-text-stroke-color: #66666670;
+				display: inline-block;
+				padding-right: 11px;
+
+				&:nth-child(2) {
+					display: block;
+					font-size: 31px;
+					background-image: -webkit-linear-gradient(90deg, #58b4d2, #3784b1);
+					// padding-right: 17px;
+					// font-size: 29px;
+				}
+			}
+		}
+
+		.best-score {
+			position: absolute;
+			top: 3%;
+			right: 2%;
+			z-index: 3;
+			text-align: left;
+			font-size: 27px;
+			color: #69c;
+			text-shadow: 0 0 11px #ffffffbb;
+
+			> div {
+				display: flex;
+				width: 190px;
+				margin-bottom: 3px;
+
+				span {
+					flex: 1;
+					text-align: right;
+				}
+			}
 		}
 
 		.menu {
@@ -83,7 +142,6 @@ content {
 			bottom: 3%;
 			z-index: 3;
 			font-size: 27px;
-			text-transform: uppercase;
 			color: #4190bb;
 
 			> div {

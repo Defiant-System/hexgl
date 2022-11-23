@@ -66,7 +66,7 @@ const hexgl = {
 		this.els = els;
 
 		// temp
-		this.dispatch({ type: "show-game" });
+		// this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -74,7 +74,13 @@ const hexgl = {
 			el;
 		// console.log(event);
 		switch (event.type) {
-			case "window.init":
+			case "window.focus":
+				break;
+			case "window.blur":
+				if (Controls) {
+					Controls.speed = 0;
+					game.pause();
+				}
 				break;
 			// system events
 			case "window.keystroke":
