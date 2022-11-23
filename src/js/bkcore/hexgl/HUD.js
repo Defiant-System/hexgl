@@ -8,8 +8,7 @@
 var bkcore = bkcore || {};
 bkcore.hexgl = bkcore.hexgl || {};
 
-bkcore.hexgl.HUD = function(opts)
-{
+bkcore.hexgl.HUD = function(opts) {
 	var self = this;
 
 	this.visible = true;
@@ -26,9 +25,7 @@ bkcore.hexgl.HUD = function(opts)
 	this.ctx.textAlign = "center";
 
 	this.bg = opts.bg;//"textures/hud/hud-bg.png";
-
 	this.fgspeed = opts.speed;//"textures/hud/hud-fg-speed.png";
-
 	this.fgshield = opts.shield;//"textures/hud/hud-fg-shield.png";
 
 	this.speedFontRatio = 24;
@@ -73,20 +70,17 @@ bkcore.hexgl.HUD = function(opts)
 	this.maxStep = 2;
 };
 
-bkcore.hexgl.HUD.prototype.resize = function(w, h)
-{
+bkcore.hexgl.HUD.prototype.resize = function(w, h) {
 	this.width = w;
 	this.height = h;
 	this.canvas.width = w;
 	this.canvas.height = h;
 }
 
-bkcore.hexgl.HUD.prototype.display = function(msg, duration)
-{
+bkcore.hexgl.HUD.prototype.display = function(msg, duration) {
 	this.messageTiming = 0;
 
-	if(this.message != "")
-	{
+	if (this.message != "") {
 		this.messageA = this.messageFontAlpha;
 		this.messagePos = 0.0;
 		this.messagePosTarget = this.width/this.messagePosTargetRatio;
@@ -99,36 +93,30 @@ bkcore.hexgl.HUD.prototype.display = function(msg, duration)
 	this.messageDuration = duration == undefined ? this.messageDurationD : duration*60;
 }
 
-bkcore.hexgl.HUD.prototype.updateLap = function(current, total)
-{
+bkcore.hexgl.HUD.prototype.updateLap = function(current, total) {
 	this.lap = current + this.lapSeparator + total;
 }
 
-bkcore.hexgl.HUD.prototype.resetLap = function()
-{
+bkcore.hexgl.HUD.prototype.resetLap = function() {
 	this.lap = "";
 }
 
-bkcore.hexgl.HUD.prototype.updateTime = function(time)
-{
+bkcore.hexgl.HUD.prototype.updateTime = function(time) {
 	this.time = this.timeSeparators[0] + time.m + this.timeSeparators[1] + time.s + this.timeSeparators[2] + time.ms + this.timeSeparators[3];
 }
 
-bkcore.hexgl.HUD.prototype.resetTime = function()
-{
+bkcore.hexgl.HUD.prototype.resetTime = function() {
 	this.time = "";
 }
 
-bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRatio)
-{
+bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRatio) {
 	var SCREEN_WIDTH = this.width;
 	var SCREEN_HEIGHT = this.height;
 
 	var SCREEN_HW = SCREEN_WIDTH / 2;
 	var SCREEN_HH = SCREEN_HEIGHT / 2;
 
-	if(!this.visible)
-	{
+	if (!this.visible) {
 		this.ctx.clearRect(0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT);
 		return;
 	}
@@ -151,12 +139,10 @@ bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRa
 	var sy = (SCREEN_WIDTH/this.shieldBarYRatio)+sho-sh;
 	
 
-	if(this.step == 0)
-	{
+	if (this.step == 0) {
 		this.ctx.clearRect(0 , oh , SCREEN_WIDTH , nh);
 
-		if(!this.messageOnly)
-		{
+		if (!this.messageOnly) {
 		    this.ctx.drawImage(this.bg, o, oh, nw, nh);
 
 		    this.ctx.save();
@@ -192,21 +178,18 @@ bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRa
 		    this.ctx.fillText(shield, SCREEN_HW, SCREEN_HEIGHT - nh*0.44);
 		}
 	}
-	else if(this.step == 1)
-	{
+	else if (this.step == 1) {
 		this.ctx.clearRect(0 , 0 , SCREEN_WIDTH , oh);
 
 		// TIME
-	    if(this.time != "")
-	    {
+	    if (this.time != "") {
 			this.ctx.font = (SCREEN_WIDTH/this.timeFontRatio)+"px "+this.font;
 		    this.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
 		    this.ctx.fillText(this.time, SCREEN_HW, SCREEN_WIDTH/this.timeMarginRatio);
 		}
 
 		// LAPS
-		if(this.lap != "")
-		{
+		if (this.lap != "") {
 			this.ctx.font = (SCREEN_WIDTH/this.timeFontRatio)+"px "+this.font;
 		    this.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
 		    this.ctx.fillText(this.lap, SCREEN_WIDTH-SCREEN_WIDTH/this.lapMarginRatio, SCREEN_WIDTH/this.timeMarginRatio);
@@ -215,14 +198,11 @@ bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRa
 	    // MESSAGE
 	    var my = SCREEN_HH-SCREEN_WIDTH/this.messageYRatio;
 
-	    if(this.messageTiming > this.messageDuration+2000)
-		{
+	    if (this.messageTiming > this.messageDuration+2000) {
 			this.previousMessage = "";
 			this.message = "";
 			this.messageA = 0.0;
-		}
-		else if(this.messageTiming > this.messageDuration && this.message != "")
-		{
+		} else if (this.messageTiming > this.messageDuration && this.message != "") {
 			this.previousMessage = this.message;
 			this.message = "";
 			this.messagePos = 0.0;
@@ -230,12 +210,9 @@ bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRa
 			this.messageA = this.messageFontAlpha;
 		}
 
-		if(this.previousMessage != "")
-		{
-			if(this.messageA < 0.001)
-				this.messageA = 0.0;
-			else
-				this.messageA += (0.0 - this.messageA) * this.messageLerp;
+		if (this.previousMessage != "") {
+			if (this.messageA < 0.001) this.messageA = 0.0;
+			else this.messageA += (0.0 - this.messageA) * this.messageLerp;
 
 			this.messagePos += (this.messagePosTarget - this.messagePos) * this.messageLerp;
 
@@ -244,15 +221,11 @@ bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRa
 		    this.ctx.fillText(this.previousMessage, SCREEN_HW, my+this.messagePos);
 		}
 
-		if(this.message != "")
-		{
-			if(this.messageTiming < this.messageDurationS)
-			{
+		if (this.message != "") {
+			if (this.messageTiming < this.messageDurationS) {
 				this.messageAS += (this.messageFontAlpha - this.messageAS) * this.messageFontLerp;
 				this.messageFontRatio += (this.messageFontRatioEnd - this.messageFontRatio) * this.messageFontLerp;
-			}
-			else
-			{
+			} else {
 				this.messageAS = this.messageFontAlpha;
 				this.messageFontRatio = this.messageFontRatioEnd;
 			}
@@ -266,5 +239,5 @@ bkcore.hexgl.HUD.prototype.update = function(speed, speedRatio, shield, shieldRa
 	this.messageTiming++;
 
 	this.step++;
-	if(this.step == this.maxStep) this.step = 0;
+	if (this.step == this.maxStep) this.step = 0;
 }

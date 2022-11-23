@@ -41,7 +41,7 @@ let geometries = {
 
 let els = {
 		content: window.find("content"),
-		gameOver: window.find(".game-over"),
+		gameOver: window.find(".view-game-over"),
 		overlay: window.find(".overlay"),
 		main: window.find(".main"),
 	},
@@ -50,7 +50,7 @@ let els = {
 		height: window.innerHeight,
 		container: els.main[0],
 		overlay: els.overlay[0],
-		gameover: els.gameOver[0],
+		gameover: els.gameOver,
 		track: "Cityscape",
 		controlType: 0,
 		difficulty: 0,
@@ -66,7 +66,7 @@ const hexgl = {
 		this.els = els;
 
 		// temp
-		// this.dispatch({ type: "show-game" });
+		this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,

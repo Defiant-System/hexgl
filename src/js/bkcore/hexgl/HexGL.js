@@ -113,7 +113,7 @@ class HexGL {
 			}
 		});
 		// temp
-		// this.gameplay.start();
+		this.gameplay.start();
 	}
 
 	displayScore(f, l) {
@@ -127,9 +127,8 @@ class HexGL {
 		];
 
 		if (this.gameover !== null) {
-			this.gameover.style.display = "block";
-			this.gameover.children[0].innerHTML = tf.m + "'" + tf.s + "''" + tf.ms;
-			this.containers.main.parentElement.style.display = "none";
+			this.gameover.parent().prop({ className: "show-game-over" });
+			this.gameover.find(".game-time").html(`${tf.m}'${tf.s}''${tf.ms}`);
 			return;
 		}
 	}
@@ -232,7 +231,7 @@ class HexGL {
 		c.angularSpeed = 0.0125;
 		c.airAngularSpeed = 0.0135;
 		c.rollAngle = 0.6;
-		c.shieldDamage = 0.06;
+		c.shieldDamage = 0.96;
 		c.collisionSpeedDecrease = 0.8;
 		c.collisionSpeedDecreaseCoef = 0.5;
 		c.rollLerp = 0.07;
