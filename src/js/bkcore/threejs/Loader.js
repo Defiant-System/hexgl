@@ -24,7 +24,6 @@ bkcore.threejs.Loader = function(opts)
 	var self = this;
 
 	this.jsonLoader = new THREE.JSONLoader();
-	console.log( this.jsonLoader );
 
 	this.errorCallback = opts.onError == undefined ? function(s){ console.warn("Error while loading %s.".replace("%s", s)) } : opts.onError;
 	this.loadCallback = opts.onLoad == undefined ? function(){ console.log("Loaded.") } : opts.onLoad;
@@ -47,8 +46,6 @@ bkcore.threejs.Loader = function(opts)
 		this.data[t] = {};
 		this.states[t] = {};
 	}
-
-	this.data.geometries = geometries;
 
 	this.progress = {
 		total: 0,
@@ -84,17 +81,15 @@ bkcore.threejs.Loader.prototype.load = function(data)
 	for(var c in data.texturesCube)
 		this.loadTextureCube(c, data.texturesCube[c]);
 
-	// for(var g in data.geometries)
-	// 	this.loadGeometry(g, data.geometries[g]);
+	for(var g in geometries) {
+		this.jsonLoader.createModel(geometries[g], mesh => self.data.geometries[g] = mesh);
+	}
 
 	for(var a in data.analysers)
 		this.loadAnalyser(a, data.analysers[a]);
 
 	for(var i in data.images)
 		this.loadImage(i, data.images[i]);
-
-	// for(var s in data.sounds)
-	// 	this.loadSound(data.sounds[s].src, s, data.sounds[s].loop, data.sounds[s].usePanner);
 
 	this.progressCallback.call(this, this.progress);
 }
@@ -197,20 +192,6 @@ bkcore.threejs.Loader.prototype.loadTextureCube = function(name, url)
 	);
 }
 
-bkcore.threejs.Loader.prototype.loadGeometry = function(name, url)
-{
-	var self = this;
-	this.data.geometries[name] = null;
-	this.updateState("geometries", name, false);
-	this.jsonLoader.load(
-		url, 
-		function(a){ 
-			self.data.geometries[name] = a;
-			self.updateState("geometries", name, true); 
-		}
-	);
-}
-
 bkcore.threejs.Loader.prototype.loadAnalyser = function(name, url)
 {
 	var self = this;
@@ -237,27 +218,5 @@ bkcore.threejs.Loader.prototype.loadImage = function(name, url)
 }
 
 bkcore.threejs.Loader.prototype.loadSound = function(src, name, loop){
-	var self = this;
-	this.updateState("sounds", name, false);
 	
-	bkcore.Audio.addSound(
-		src,
-		name, 
-		loop, 
-		function(){
-			self.updateState("sounds", name, true);
-		}
-	);
-	
-	this.data.sounds[name] = {
-		play: function(){
-			bkcore.Audio.play(name);
-		},
-		stop: function(){
-			bkcore.Audio.stop(name);
-		},
-		volume: function(vol){
-			bkcore.Audio.volume(name, vol);
-		}
-	};
 };
