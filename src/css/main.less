@@ -1,4 +1,6 @@
 
+@view-anim: 500ms;
+
 content {
 	position: absolute;
 	top: 0;
@@ -9,35 +11,50 @@ content {
 	font-size: 27px;
 	font-weight: 100;
 	text-align: center;
+	min-height: 1px;
+	transition: min-height @view-anim ease-in-out;
 
 	&.show-start > div.view-start {
-		display: block;
+		// display: block;
+		opacity: 1;
+		z-index: 19;
 	}
 
 	&.show-credits > div.view-credits {
-		display: block;
+		// display: block;
+		opacity: 1;
+		z-index: 19;
 	}
 
 	&.show-pre-game > div.view-pre-game {
-		display: block;
+		// display: block;
+		opacity: 1;
+		z-index: 19;
 	}
 
 	&.show-game > div.view-game {
-		display: block;
+		// display: block;
+		opacity: 1;
+		z-index: 19;
 	}
 
 	&.show-game-over > div.view-game-over {
-		display: block;
+		// display: block;
+		opacity: 1;
+		z-index: 19;
 	}
+
 
 	> div[class*="view-"],
 	> div[class^="view-"] {
-		display: none;
+		// display: none;
 		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
+		opacity: 0;
+		transition: opacity @view-anim ease-in-out;
 	}
 
 	.click-to-continue {

@@ -66,7 +66,8 @@ const hexgl = {
 		this.els = els;
 
 		// temp
-		this.dispatch({ type: "show-game" });
+		// this.dispatch({ type: "show-game" });
+		// this.dispatch({ type: "fadeIn-pre-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
