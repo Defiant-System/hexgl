@@ -39,7 +39,12 @@ let geometries = {
 @import "bkcore/hexgl/HexGL.js"
 
 
-let els = {
+// default settings
+let Pref = {
+		fx: true,
+		music: true,
+	},
+	els = {
 		content: window.find("content"),
 		gameOver: window.find(".view-game-over"),
 		overlay: window.find(".overlay"),
@@ -65,16 +70,30 @@ const hexgl = {
 		// fast references
 		this.els = els;
 
+		// get settings, if any
+		this.settings = window.settings.getItem("settings") || Pref;
+
+		game.load({
+			onLoad() {
+				console.log("enable play button");
+			}
+		});
+
 		// temp
 		// this.dispatch({ type: "show-game" });
-		// this.dispatch({ type: "fadeIn-pre-game" });
 	},
 	dispatch(event) {
 		let Self = hexgl,
 			Controls = game.components.shipControls,
+			value,
 			el;
 		// console.log(event);
 		switch (event.type) {
+			// system events
+			case "window.close":
+				// save settings
+				// window.settings.setItem("settings", Self.settings);
+				break;
 			case "window.focus":
 				break;
 			case "window.blur":
@@ -119,7 +138,7 @@ const hexgl = {
 				}
 				break;
 			case "window.keyup":
-				// keyboard controls; UP state
+				// keyboard controls; UP state 
 				switch (event.keyCode) {
 					case 37: // left
 						Controls.key.left = false;
@@ -141,9 +160,27 @@ const hexgl = {
 				break;
 
 			// custom events
-			case "set-quality": break;
-			case "toggle-hud": break;
-			case "toggle-god-mode": break;
+			case "toggle-music":
+				value = window.midi.playing;
+				if (value) {
+					window.midi.stop();
+				} else {
+					window.midi.play("~/audio/beethoven.mid");
+				}
+				// UI value
+				event.el.find("span").html(value ? "Off" : "On");
+				// update settings
+				Self.settings.music = value ? false : true;
+				break;
+			case "toggle-fx":
+				value = window.audio.mute;
+				// UI value
+				event.el.find("span").html(value ? "On" : "Off");
+				// change value
+				window.audio.mute = !value;
+				// update settings
+				Self.settings.fx = value ? false : true;
+				break;
 			case "show-pre-game":
 			case "show-credits":
 			case "show-start":
@@ -152,12 +189,8 @@ const hexgl = {
 			case "show-game":
 				Self.els.content.prop({ className: event.type });
 
-				game.load({
-					onLoad: function() {
-						game.init();
-						game.start();
-					}
-				});
+				game.init();
+				game.start();
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");
