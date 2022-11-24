@@ -11,6 +11,9 @@ bkcore.hexgl = bkcore.hexgl || {};
 bkcore.hexgl.HUD = function(opts) {
 	var self = this;
 
+	this.visible = true;
+	this.messageOnly = false;
+
 	this.width = opts.width;
 	this.height = opts.height;
 
@@ -24,14 +27,6 @@ bkcore.hexgl.HUD = function(opts) {
 	this.bg = opts.bg;//"textures/hud/hud-bg.png";
 	this.fgspeed = opts.speed;//"textures/hud/hud-fg-speed.png";
 	this.fgshield = opts.shield;//"textures/hud/hud-fg-shield.png";
-	this.font = opts.font || "Arial";
-
-	this.reset();
-};
-
-bkcore.hexgl.HUD.prototype.reset = function() {
-	this.visible = true;
-	this.messageOnly = false;
 
 	this.speedFontRatio = 24;
 	this.speedBarRatio = 2.91;
@@ -42,6 +37,7 @@ bkcore.hexgl.HUD.prototype.reset = function() {
 	this.timeMarginRatio = 18;
 	this.timeFontRatio = 19.2;
 
+	this.font = opts.font || "Arial";
 	this.time = "";
 
 	this.message = "";
@@ -71,7 +67,7 @@ bkcore.hexgl.HUD.prototype.reset = function() {
 
 	this.step = 0;
 	this.maxStep = 2;
-}
+};
 
 bkcore.hexgl.HUD.prototype.resize = function(w, h) {
 	this.width = w;

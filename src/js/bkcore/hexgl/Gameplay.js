@@ -48,7 +48,7 @@ bkcore.hexgl.Gameplay = function(opts) {
 	this.maxLaps = 3;
 	this.score = null;
 	this.finishTime = null;
-	this.onFinish = opts.onFinish == undefined ? function(){console.log("FINISH");} : opts.onFinish;
+	this.onFinish = opts.onFinish;
 
 	this.raceData = null;
 

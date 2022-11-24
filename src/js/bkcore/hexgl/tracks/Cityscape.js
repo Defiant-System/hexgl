@@ -10,35 +10,27 @@ bkcore.hexgl = bkcore.hexgl || {};
 bkcore.hexgl.tracks = bkcore.hexgl.tracks || {};
 
 bkcore.hexgl.tracks.Cityscape = {
-
 	lib: null,
 	materials: {},
-
 	name: "Cityscape",
-
 	checkpoints: {
 		list: [0,1,2],
 		start: 0,
 		last: 2
 	},
-
 	spawn: {
 		x: -1134*2,
 		y: 387,
 		z: -443*2
 	},
-
 	spawnRotation: {
 		x: 0,
 		y: 0,
 		z: 0
 	},
-
 	analyser: null,
 	pixelRatio: 2048.0 / 6000.0,
-
-	load: function(opts, quality)
-	{
+	load(opts, quality) {
 		this.lib = new bkcore.threejs.Loader(opts);
 
 		this.lib.load({
@@ -82,9 +74,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			}
 		});
 	},
-
-	buildMaterials: function(quality)
-	{
+	buildMaterials(quality) {
 		this.materials.track = bkcore.Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "track.cityscape.diffuse"),
 			specular: this.lib.get("textures", "track.cityscape.specular"),
@@ -164,23 +154,19 @@ bkcore.hexgl.tracks.Cityscape = {
 			transparent: false
 		});
 	},
-
-	buildScenes: function(ctx, quality)
-	{
+	buildScenes(ctx, quality) {
 		// IMPORTANT
 		this.analyser = this.lib.get("analysers", "track.cityscape.collision");
 
 		// SKYBOX
 		var sceneCube = new THREE.Scene();
-
 		var cameraCube = new THREE.PerspectiveCamera( 70, ctx.width / ctx.height, 1, 6000 );
 		sceneCube.add( cameraCube );
 
 		var skyshader = THREE.ShaderUtils.lib[ "cube" ];
 		skyshader.uniforms[ "tCube" ].texture = this.lib.get("texturesCube", "skybox.dawnclouds");
 
-		var skymaterial = new THREE.ShaderMaterial(
-		{
+		var skymaterial = new THREE.ShaderMaterial({
 			fragmentShader: skyshader.fragmentShader,
 			vertexShader: skyshader.vertexShader,
 			uniforms: skyshader.uniforms,
@@ -194,7 +180,11 @@ bkcore.hexgl.tracks.Cityscape = {
 
 		ctx.manager.add("sky", sceneCube, cameraCube);
 
-		var ambient = 0xbbbbbb, diffuse = 0xffffff, specular = 0xffffff, shininess = 42, scale = 23;
+		var ambient = 0xbbbbbb,
+			diffuse = 0xffffff,
+			specular = 0xffffff,
+			shininess = 42,
+			scale = 23;
 
 		// MAIN SCENE
 		var camera = new THREE.PerspectiveCamera( 70, ctx.width / ctx.height, 1, 60000 );
@@ -209,15 +199,14 @@ bkcore.hexgl.tracks.Cityscape = {
 		sun.lookAt(new THREE.Vector3());
 
 		// desktop + quality mid or high
-		if(quality > 2)
-		{
+		if(quality > 2) {
 			sun.castShadow = true;
 			sun.shadowCameraNear = 50;
 			sun.shadowCameraFar = camera.far*2;
-			sun.shadowCameraRight     =  3000;
-			sun.shadowCameraLeft      = -3000;
-			sun.shadowCameraTop       =  3000;
-			sun.shadowCameraBottom    = -3000;
+			sun.shadowCameraRight = 3000;
+			sun.shadowCameraLeft = -3000;
+			sun.shadowCameraTop = 3000;
+			sun.shadowCameraBottom = -3000;
 			//sun.shadowCameraVisible = true;
 			sun.shadowBias = 0.0001;
 			sun.shadowDarkness = 0.7;
@@ -245,23 +234,16 @@ bkcore.hexgl.tracks.Cityscape = {
 		var boosterLight = new THREE.PointLight(0x00a2ff, 4.0, 60);
 		boosterLight.position.set(0, 0.665, -4);
 		
-		// desktop + quality low, mid or high
-		// OR
-		// mobile + quality mid or high
-		// NB booster is now enabled on desktop + low quality,
-		// when it wasn't before; this is because this booster setting
-		// is the only difference between mobile + mid quality
-		// and desktop + low quality, so I merged them for convenience
-		if(quality > 0)
-			ship.add(boosterLight);
+		// quality high
+		ship.add(boosterLight);
 
 		// SHIP CONTROLS
 		var shipControls = new bkcore.hexgl.ShipControls(ctx);
 		shipControls.collisionMap = this.lib.get("analysers", "track.cityscape.collision");
-		shipControls.collisionPixelRatio = 2048.0 / 6000.0;
+		shipControls.collisionPixelRatio = this.pixelRatio;
 		shipControls.collisionDetection = true;
 		shipControls.heightMap = this.lib.get("analysers", "track.cityscape.height");;
-		shipControls.heightPixelRatio = 2048.0 / 6000.0;
+		shipControls.heightPixelRatio = this.pixelRatio;
 		shipControls.heightBias = 4.0;
 		shipControls.heightScale = 10.0;
 		shipControls.control(ship);
@@ -279,8 +261,7 @@ bkcore.hexgl.tracks.Cityscape = {
 		};
 		
 		// desktop + quality mid or high
-		if(quality > 2)
-		{
+		if (quality > 2) {
 			fxParams.textureCloud = this.lib.get("textures", "cloud");
 			fxParams.textureSpark = this.lib.get("textures", "spark");
 			fxParams.useParticles = true;
@@ -309,38 +290,30 @@ bkcore.hexgl.tracks.Cityscape = {
 			viewOffset: 10.0
 		});
 
-		ctx.manager.add("game", scene, camera, function(delta, renderer)
-		{
-			if(delta > 25 && this.objects.lowFPS < 1000) this.objects.lowFPS++;
+		ctx.manager.add("game", scene, camera, function(delta, renderer) {
+			if (delta > 25 && this.objects.lowFPS < 1000) this.objects.lowFPS++;
 
-			var dt = delta/16.6;
+			var dt = delta / 16.6;
 
 			this.objects.components.shipControls.update(dt);
-
 			this.objects.components.shipEffects.update(dt);
-
 			this.objects.components.cameraChase.update(dt, this.objects.components.shipControls.getSpeedRatio());
-			/*this.objects.time += 0.002;
-			var c = this.objects.components.cameraChase.camera;
-			c.position.set(
-				Math.cos(this.objects.time)*15+this.objects.components.shipControls.dummy.position.x,
-				10+this.objects.components.shipControls.dummy.position.y,
-				Math.sin(this.objects.time)*15+this.objects.components.shipControls.dummy.position.z
-			);
-			c.lookAt(this.objects.components.shipControls.dummy.position);
-			this.objects.components.cameraChase.cameraCube.rotation.copy(c.rotation);*/
-
 			this.objects.composers.game.render(dt);
-			if(this.objects.hud) this.objects.hud.update(
-				this.objects.components.shipControls.getRealSpeed(100),
-				this.objects.components.shipControls.getRealSpeedRatio(),
-				this.objects.components.shipControls.getShield(100),
-				this.objects.components.shipControls.getShieldRatio()
-			);
-			if(this.objects.components.shipControls.getShieldRatio() < 0.2)
+
+			if (this.objects.hud) {
+				this.objects.hud.update(
+					this.objects.components.shipControls.getRealSpeed(100),
+					this.objects.components.shipControls.getRealSpeedRatio(),
+					this.objects.components.shipControls.getShield(100),
+					this.objects.components.shipControls.getShieldRatio()
+				);
+			}
+
+			if (this.objects.components.shipControls.getShieldRatio() < 0.2) {
 				this.objects.extras.vignetteColor.setHex(0x992020);
-			else
+			} else {
 				this.objects.extras.vignetteColor.setHex(0x458ab1);
+			}
 		},
 		{
 			components: ctx.components,

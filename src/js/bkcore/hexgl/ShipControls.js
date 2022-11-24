@@ -8,8 +8,7 @@
 var bkcore = bkcore || {};
 bkcore.hexgl = bkcore.hexgl || {};
 
-bkcore.hexgl.ShipControls = function(ctx)
-{
+bkcore.hexgl.ShipControls = function(ctx) {
 	var self = this;
 	var domElement = ctx.document;
 
@@ -122,8 +121,7 @@ bkcore.hexgl.ShipControls = function(ctx)
 	this.orientationController = null;
 	this.gamepadController = null
 
-	if(ctx.controlType == 1 && bkcore.controllers.TouchController.isCompatible())
-	{
+	if(ctx.controlType == 1 && bkcore.controllers.TouchController.isCompatible()) {
 		this.touchController = new bkcore.controllers.TouchController(
 			domElement, ctx.width/2,
 			function(state, touch, event){
@@ -139,9 +137,7 @@ bkcore.hexgl.ShipControls = function(ctx)
 						self.key.forward = true;
 				}
 			});
-	}
-	else if(ctx.controlType == 4 && bkcore.controllers.OrientationController.isCompatible())
-	{
+	} else if(ctx.controlType == 4 && bkcore.controllers.OrientationController.isCompatible()) {
 		this.orientationController = new bkcore.controllers.OrientationController(
 			domElement, true,
 			function(state, touch, event){
@@ -154,9 +150,7 @@ bkcore.hexgl.ShipControls = function(ctx)
 				else
 					self.key.forward = true;
 			});
-	}
-	else if(ctx.controlType == 3 && bkcore.controllers.GamepadController.isCompatible())
-	{
+	} else if(ctx.controlType == 3 && bkcore.controllers.GamepadController.isCompatible()) {
 		this.gamepadController = new bkcore.controllers.GamepadController(
 			function(controller){
 				if (controller.select)
@@ -168,9 +162,7 @@ bkcore.hexgl.ShipControls = function(ctx)
 					self.key.left = controller.lstickx < -0.1;
 					self.key.right = controller.lstickx > 0.1;
 			});
-	}
-	else if(ctx.controlType == 2)
-	{
+	} else if(ctx.controlType == 2) {
 		if(Leap == null)
 			throw new Error("Unable to reach LeapJS!");
 
@@ -282,15 +274,13 @@ bkcore.hexgl.ShipControls = function(ctx)
 	// domElement.addEventListener('keyup', onKeyUp, false);
 };
 
-bkcore.hexgl.ShipControls.prototype.control = function(threeMesh)
-{
+bkcore.hexgl.ShipControls.prototype.control = function(threeMesh) {
 	this.mesh = threeMesh;
 	this.mesh.martixAutoUpdate = false;
 	this.dummy.position = this.mesh.position;
 };
 
-bkcore.hexgl.ShipControls.prototype.reset = function(position, rotation)
-{
+bkcore.hexgl.ShipControls.prototype.reset = function(position, rotation) {
 	this.resetPos = position;
 	this.resetRot = rotation;
 	this.movement.set(0,0,0);
@@ -315,19 +305,16 @@ bkcore.hexgl.ShipControls.prototype.reset = function(position, rotation)
 	this.mesh.applyMatrix(this.dummy.matrix);
 }
 
-bkcore.hexgl.ShipControls.prototype.terminate = function()
-{
+bkcore.hexgl.ShipControls.prototype.terminate = function() {
 	this.destroy();
 
-	if(this.leapController != null)
-	{
+	if (this.leapController != null) {
 		this.leapController.disconnect();
 		this.leapInfo.style.display = 'none';
 	}
 }
 
-bkcore.hexgl.ShipControls.prototype.destroy = function()
-{
+bkcore.hexgl.ShipControls.prototype.destroy = function() {
 	// bkcore.Audio.play('destroyed');
 	// bkcore.Audio.stop('bg');
 	// bkcore.Audio.stop('wind');
@@ -339,8 +326,7 @@ bkcore.hexgl.ShipControls.prototype.destroy = function()
 	this.collision.right = false;
 }
 
-bkcore.hexgl.ShipControls.prototype.fall = function()
-{
+bkcore.hexgl.ShipControls.prototype.fall = function() {
 	this.active = false;
 	this.collision.front = false;
 	this.collision.left = false;
@@ -352,10 +338,8 @@ bkcore.hexgl.ShipControls.prototype.fall = function()
 	}, 1500);
 }
 
-bkcore.hexgl.ShipControls.prototype.update = function(dt)
-{
-	if(this.falling)
-	{
+bkcore.hexgl.ShipControls.prototype.update = function(dt) {
+	if (this.falling) {
 		this.mesh.position.addSelf(this.fallVector);
 		return;
 	}
@@ -369,8 +353,7 @@ bkcore.hexgl.ShipControls.prototype.update = function(dt)
 	var angularAmount = 0.0;
 	var yawLeap = 0.0;
 
-	if(this.leapBridge != null && this.leapBridge.hasHands)
-	{
+	if (this.leapBridge != null && this.leapBridge.hasHands) {
 		rollAmount -= this.leapBridge.palmNormal[0] * 3.5 * this.rollAngle;
 		yawLeap = -this.leapBridge.palmNormal[2] * 0.6;
 	}
