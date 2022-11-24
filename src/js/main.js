@@ -80,7 +80,13 @@ const hexgl = {
 
 		// temp
 		els.content.find(".fx").trigger("click");
-		// this.dispatch({ type: "show-game" });
+		this.dispatch({ type: "show-pre-game" });
+
+		setTimeout(() => {
+			this.dispatch({ type: "show-game" });
+
+			// setTimeout(() => game.gameplay.end(2), 100);
+		}, 400);
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -198,6 +204,7 @@ const hexgl = {
 
 				game.init();
 				game.start();
+
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

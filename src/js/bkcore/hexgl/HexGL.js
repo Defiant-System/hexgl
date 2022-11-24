@@ -71,6 +71,7 @@ class HexGL {
 
 	reset() {
 		this.manager.get("game").objects.lowFPS = 0;
+		this.gameplay.hud.reset();
 		this.gameplay.start();
 	}
 

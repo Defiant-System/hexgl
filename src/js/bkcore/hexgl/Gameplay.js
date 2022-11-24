@@ -147,10 +147,10 @@ bkcore.hexgl.Gameplay.prototype.end = function(result) {
 	this.shipControls.active = false;
 
 	if (result == this.results.FINISH) {
-		if (this.hud != null) this.hud.display("Finish");
+		if (this.hud != null) this.hud.display("Finish", 2);
 		this.step = 100;
 	} else if (result == this.results.DESTROYED) {
-		if (this.hud != null) this.hud.display("Destroyed");
+		if (this.hud != null) this.hud.display("Destroyed", 2);
 		this.step = 100;
 	}
 }
