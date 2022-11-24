@@ -94,6 +94,7 @@ content {
 			right: 0;
 			left: 0;
 			z-index: 1;
+			pointer-events: none;
 			background: url(~/img/bg.jpg) no-repeat 50% 50% fixed;
 			background-size: 105% auto;
 			animation: animbg 3s 150ms ease-in-out infinite;
@@ -106,6 +107,7 @@ content {
 			bottom: 0;
 			left: 0;
 			z-index: 2;
+			pointer-events: none;
 			background: url(~/img/feisar.png) no-repeat 50% 0%;
 			filter: drop-shadow(0 0 17px #fff);
 			background-size: 67% auto;
@@ -122,6 +124,7 @@ content {
 			font-style: italic;
 			text-align: right;
 			line-height: .925;
+			pointer-events: none;
 			filter: drop-shadow(0 0 7px #fff);
 			z-index: 3;
 			// top: 270px;
@@ -200,9 +203,14 @@ content {
 					font-size: 37px;
 					height: 45px;
 					
-					&:hover {
+					&:not(.disabled):hover {
 						font-size: 44px;
 						padding-top: 4px;
+					}
+
+					&.disabled {
+						color: #999;
+						pointer-events: none;
 					}
 				}
 

@@ -75,7 +75,6 @@ class HexGL {
 	}
 
 	restart() {
-		// this.document.getElementById('finish').style.display = 'none';
 		this.reset();
 	}
 
@@ -100,8 +99,8 @@ class HexGL {
 		var self = this;
 
 		this.gameplay = new bkcore.hexgl.Gameplay({
-			mode: this.mode,
 			hud: this.hud,
+			mode: this.mode,
 			shipControls: this.components.shipControls,
 			cameraControls: this.components.cameraChase,
 			analyser: this.track.analyser,

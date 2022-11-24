@@ -43,8 +43,8 @@ let geometries = {
 let Pref = {
 		"fx": true,
 		"music": true,
-		"best-race": "10'00''1000",
-		"best-lap": "05'00''1000",
+		"best-race": `9'00"0000`,
+		"best-lap": `3'00"0000`,
 	},
 	els = {
 		content: window.find("content"),
@@ -71,17 +71,15 @@ const hexgl = {
 	init() {
 		// fast references
 		this.els = els;
-
 		// get settings, if any
 		this.settings = window.settings.getItem("settings") || Pref;
-
-		game.load({
-			onLoad() {
-				console.log("enable play button");
-			}
-		});
+		// enable start button when resources are done loading
+		game.load({ onLoad: () => els.content.find(".menu .start.disabled").removeClass("disabled") });
+		// best rece / lap values
+		this.dispatch({ type: "update-best-race-lap" });
 
 		// temp
+		els.content.find(".fx").trigger("click");
 		// this.dispatch({ type: "show-game" });
 	},
 	dispatch(event) {
@@ -162,6 +160,13 @@ const hexgl = {
 				break;
 
 			// custom events
+			case "update-best-race-lap":
+				value = Self.settings["best-race"];
+				Self.els.content.find(`.view-start .best-race span`).html(value);
+
+				value = Self.settings["best-lap"];
+				Self.els.content.find(`.view-start .best-lap span`).html(value);
+				break;
 			case "toggle-music":
 				value = window.midi.playing;
 				if (value) {

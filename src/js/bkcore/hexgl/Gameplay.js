@@ -17,9 +17,9 @@ bkcore.hexgl.Gameplay = function(opts) {
 	this.active = false;
 	this.timer = new bkcore.Timer();
 	this.modes = {
-		'timeattack':null,
-		'survival':null,
-		'replay':null
+		"timeattack": null,
+		"survival": null,
+		"replay": null
 	};
 	this.mode = opts.mode == undefined || !(opts.mode in this.modes) ? "timeattack" : opts.mode;
 	this.step = 0;
@@ -95,7 +95,7 @@ bkcore.hexgl.Gameplay = function(opts) {
 
 bkcore.hexgl.Gameplay.prototype.simu = function() {
 	this.lapTimes = [92300, 91250, 90365];
-	this.finishTime = this.lapTimes[0]+this.lapTimes[1]+this.lapTimes[2];
+	this.finishTime = this.lapTimes[0] + this.lapTimes[1] + this.lapTimes[2];
 	if (this.hud != null) this.hud.display("Finish");
 	this.step = 100;
 	this.result = this.results.FINISH;
@@ -109,18 +109,17 @@ bkcore.hexgl.Gameplay.prototype.start = function(opts) {
 
 	this.shipControls.reset(this.track.spawn, this.track.spawnRotation);
 	this.shipControls.active = false;
-
 	this.previousCheckPoint = this.track.checkpoints.start;
-
 	this.raceData = new bkcore.hexgl.RaceData(this.track.name, this.mode, this.shipControls);
-	if (this.mode == 'replay') {
+
+	if (this.mode == "replay") {
 		this.cameraControls.mode = this.cameraControls.modes.ORBIT;
 		if (this.hud != null) this.hud.messageOnly = true;
 
 		try {
-			var d = localStorage['race-'+this.track.name+'-replay'];
+			var d = localStorage[`race-${this.track.name}-replay`];
 			if (d == undefined) {
-				console.error('No replay data for '+'race-'+this.track.name+'-replay'+'.');
+				console.error(`No replay data for race-${this.track.name}-replay.`);
 				return false;
 			}
 			this.raceData.import( JSON.parse(d) );
@@ -132,6 +131,7 @@ bkcore.hexgl.Gameplay.prototype.start = function(opts) {
 	this.active = true;
 	this.step = 0;
 	this.timer.start();
+
 	if (this.hud != null) {
 		this.hud.resetTime();
 		this.hud.display("Get ready", 1);
