@@ -41,8 +41,10 @@ let geometries = {
 
 // default settings
 let Pref = {
-		fx: true,
-		music: true,
+		"fx": true,
+		"music": true,
+		"best-race": "10'00''1000",
+		"best-lap": "05'00''1000",
 	},
 	els = {
 		content: window.find("content"),
