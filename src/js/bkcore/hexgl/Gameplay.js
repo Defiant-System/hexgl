@@ -95,7 +95,7 @@ class Gameplay {
 		this.shipControls.reset(this.track.spawn, this.track.spawnRotation);
 		this.shipControls.active = false;
 		this.previousCheckPoint = this.track.checkpoints.start;
-		this.raceData = new bkcore.hexgl.RaceData(this.track.name, this.mode, this.shipControls);
+		this.raceData = new RaceData(this.track.name, this.mode, this.shipControls);
 
 		if (this.mode == "replay") {
 			this.cameraControls.mode = this.cameraControls.modes.ORBIT;

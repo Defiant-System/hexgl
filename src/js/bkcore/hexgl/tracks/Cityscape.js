@@ -238,7 +238,7 @@ bkcore.hexgl.tracks.Cityscape = {
 		ship.add(boosterLight);
 
 		// SHIP CONTROLS
-		var shipControls = new bkcore.hexgl.ShipControls(ctx);
+		var shipControls = new ShipControls(ctx);
 		shipControls.collisionMap = this.lib.get("analysers", "track.cityscape.collision");
 		shipControls.collisionPixelRatio = this.pixelRatio;
 		shipControls.collisionDetection = true;
@@ -266,7 +266,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			fxParams.textureSpark = this.lib.get("textures", "spark");
 			fxParams.useParticles = true;
 		}
-		ctx.components.shipEffects = new bkcore.hexgl.ShipEffects(fxParams);
+		ctx.components.shipEffects = new ShipEffects(fxParams);
 
 		// TRACK
 		var track = ctx.createMesh(scene, this.lib.get("geometries", "track.cityscape"), 0, -5, 0, this.materials.track);
