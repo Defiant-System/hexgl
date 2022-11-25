@@ -130,7 +130,7 @@ class Loader {
 
 	loadAnalyser(name, url) {
 		this.updateState("analysers", name, false);
-		this.data.analysers[name] = new window.bkcore.ImageData(
+		this.data.analysers[name] = new ImageData(
 			url,
 			() => this.updateState("analysers", name, true)
 		);

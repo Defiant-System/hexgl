@@ -75,7 +75,7 @@ bkcore.hexgl.tracks.Cityscape = {
 		});
 	},
 	buildMaterials(quality) {
-		this.materials.track = bkcore.Utils.createNormalMaterial({
+		this.materials.track = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "track.cityscape.diffuse"),
 			specular: this.lib.get("textures", "track.cityscape.specular"),
 			normal: this.lib.get("textures", "track.cityscape.normal"),
@@ -85,7 +85,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			perPixel: true
 		});
 
-		this.materials.bonusBase = bkcore.Utils.createNormalMaterial({
+		this.materials.bonusBase = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "bonus.base.diffuse"),
 			specular: this.lib.get("textures", "bonus.base.specular"),
 			normal: this.lib.get("textures", "bonus.base.normal"),
@@ -100,7 +100,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			color: 0x0096ff
 		});
 
-		this.materials.ship = bkcore.Utils.createNormalMaterial({
+		this.materials.ship = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "ship.feisar.diffuse"),
 			specular: this.lib.get("textures", "ship.feisar.specular"),
 			normal: this.lib.get("textures", "ship.feisar.normal"),
@@ -115,7 +115,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			transparent: true
 		});
 
-		this.materials.scrapers1 = bkcore.Utils.createNormalMaterial({
+		this.materials.scrapers1 = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "track.cityscape.scrapers1.diffuse"),
 			specular: this.lib.get("textures", "track.cityscape.scrapers1.specular"),
 			normal: this.lib.get("textures", "track.cityscape.scrapers1.normal"),
@@ -127,7 +127,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			perPixel: false
 		});
 
-		this.materials.scrapers2 = bkcore.Utils.createNormalMaterial({
+		this.materials.scrapers2 = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "track.cityscape.scrapers2.diffuse"),
 			specular: this.lib.get("textures", "track.cityscape.scrapers2.specular"),
 			normal: this.lib.get("textures", "track.cityscape.scrapers2.normal"),
@@ -139,7 +139,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			perPixel: false
 		});
 
-		this.materials.start = bkcore.Utils.createNormalMaterial({
+		this.materials.start = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "track.cityscape.start.diffuse"),
 			specular: this.lib.get("textures", "track.cityscape.start.specular"),
 			normal: this.lib.get("textures", "track.cityscape.start.normal"),
