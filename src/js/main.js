@@ -80,13 +80,12 @@ const hexgl = {
 
 		// temp
 		els.content.find(".fx").trigger("click");
-		this.dispatch({ type: "show-pre-game" });
 
-		setTimeout(() => {
-			this.dispatch({ type: "show-game" });
-
-			// setTimeout(() => game.gameplay.end(2), 100);
-		}, 400);
+		// this.dispatch({ type: "show-pre-game" });
+		// setTimeout(() => {
+		// 	this.dispatch({ type: "show-game" });
+		// 	// setTimeout(() => game.gameplay.end(2), 100);
+		// }, 400);
 	},
 	dispatch(event) {
 		let Self = hexgl,
