@@ -181,7 +181,7 @@ class HexGL {
 		var renderModel = new THREE.RenderPass( this.manager.get("game").scene, this.manager.get("game").camera );
 		renderModel.clear = false;
 
-		var effectHex = new THREE.ShaderPass( bkcore.threejs.Shaders[ "hexvignette" ] );
+		var effectHex = new THREE.ShaderPass( Shaders[ "hexvignette" ] );
 		effectHex.uniforms[ "size" ].value = 512.0 * (this.width/1633);
 		effectHex.uniforms[ "rx" ].value = this.width;
 		effectHex.uniforms[ "ry" ].value = this.height;

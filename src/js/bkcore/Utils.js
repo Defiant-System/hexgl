@@ -7,13 +7,15 @@
 	@author Thibaut 'BKcore' Despoulain <http://bkcore.com>
  */
 
+var bkcore = bkcore || {};
+
 (function() {
 	var Utils, exports;
 
 	Utils = (function() {
 
 		/*
-			Creates a bkcore.threejs.Shaders["normalV"|"normal"] material
+			Creates a Shaders["normalV"|"normal"] material
 			with given parameters
 		 */
 		function Utils() {}
@@ -39,7 +41,7 @@
 				opts.metal = false;
 			}
 			shadername = opts.perPixel ? "normalV" : "normal";
-			shader = bkcore.threejs.Shaders[shadername];
+			shader = Shaders[shadername];
 			uniforms = THREE.UniformsUtils.clone(shader.uniforms);
 			uniforms["enableDiffuse"].value = true;
 			uniforms["enableSpecular"].value = true;
