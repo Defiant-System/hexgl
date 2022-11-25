@@ -156,7 +156,7 @@ class HexGL {
 		this.containers.main.appendChild( renderer.domElement );
 		this.canvas = renderer.domElement;
 		this.renderer = renderer;
-		this.manager = new bkcore.threejs.RenderManager(renderer);
+		this.manager = new RenderManager(renderer);
 	}
 
 	initHUD() {

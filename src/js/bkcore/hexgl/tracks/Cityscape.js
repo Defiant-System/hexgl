@@ -31,7 +31,7 @@ bkcore.hexgl.tracks.Cityscape = {
 	analyser: null,
 	pixelRatio: 2048.0 / 6000.0,
 	load(opts, quality) {
-		this.lib = new bkcore.threejs.Loader(opts);
+		this.lib = new Loader(opts);
 
 		this.lib.load({
 			textures: {

@@ -25,7 +25,7 @@ class ShipEffects {
 			this.pRad.normalize();
 
 			this.particles = {
-				leftSparks: new bkcore.threejs.Particles({
+				leftSparks: new Particles({
 					randomness: new THREE.Vector3(0.4,0.4,0.4),
 					tint: 0xffffff,
 					color: 0xffc000,
@@ -35,7 +35,7 @@ class ShipEffects {
 					life: 60,
 					max: 200
 				}),
-				leftClouds: new bkcore.threejs.Particles({
+				leftClouds: new Particles({
 					opacity: 0.8,
 					tint: 0xffffff,
 					color: 0x666666,
@@ -50,7 +50,7 @@ class ShipEffects {
 					velocity: new THREE.Vector3(0,0,-0.4),
 					randomness: new THREE.Vector3(0.05,0.05,0.1)
 				}),
-				rightSparks: new bkcore.threejs.Particles({
+				rightSparks: new Particles({
 					randomness: new THREE.Vector3(0.4,0.4,0.4),
 					tint: 0xffffff,
 					color: 0xffc000,
@@ -60,7 +60,7 @@ class ShipEffects {
 					life: 60,
 					max: 200
 				}),
-				rightClouds: new bkcore.threejs.Particles({
+				rightClouds: new Particles({
 					opacity: 0.8,
 					tint: 0xffffff,
 					color: 0x666666,
