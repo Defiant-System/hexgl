@@ -44,7 +44,7 @@ bkcore.hexgl.Ladder.displayLadder = function(id, track, mode, num)
 	var m = Math.min((num == undefined ? 10 : num), l.length-1);
 	for(var i = 0; i < l.length-1; i++)
 	{
-		var t = bkcore.Timer.msToTime(l[i]['score']);
+		var t = Timer.msToTime(l[i]['score']);
 		h += '<span class="ladder-row"><b>'+(i+1)+'. '+l[i]['name']+'</b><i>'+t.m+'\''+t.s+'\'\''+t.ms+'</i></span>';
 	}
 

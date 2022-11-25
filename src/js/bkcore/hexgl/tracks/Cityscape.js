@@ -280,7 +280,7 @@ bkcore.hexgl.tracks.Cityscape = {
 		startbanner.doubleSided = true;
 
 		// CAMERA
-		ctx.components.cameraChase = new bkcore.hexgl.CameraChase({
+		ctx.components.cameraChase = new CameraChase({
 			target: ship,
 			camera: camera,
 			cameraCube: ctx.manager.get("sky").camera,

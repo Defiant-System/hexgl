@@ -61,17 +61,11 @@ class Timer {
 	// @return Object<string>{h,m,s,ms}
 	msToTimeString(t) {
 		let time = this.msToTime(t);
-		time.h = this.zfill(time.h, 2);
-		time.m = this.zfill(time.m, 2);
-		time.s = this.zfill(time.s, 2);
-		time.ms = this.zfill(time.ms, 4);
+		time.h = time.h.toString().padStart(2, "0");
+		time.m = time.m.toString().padStart(2, "0");
+		time.s = time.s.toString().padStart(2, "0");
+		time.ms = time.ms.toString().padStart(4, "0");
 		return time;
-	}
-
-	zfill(num, size) {
-		let len = size - num.toString().length;
-		if (len > 0) return new Array(len + 1).join("0") + num;
-		else return num.toString();
 	}
 
 }

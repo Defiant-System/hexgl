@@ -99,7 +99,7 @@ class HexGL {
 	initGameplay() {
 		var self = this;
 
-		this.gameplay = new bkcore.hexgl.Gameplay({
+		this.gameplay = new Gameplay({
 			hud: this.hud,
 			mode: this.mode,
 			shipControls: this.components.shipControls,
@@ -119,11 +119,11 @@ class HexGL {
 	displayScore(f, l) {
 		this.active = false;
 
-		var tf = bkcore.Timer.msToTimeString(f);
+		var tf = this.gameplay.timer.msToTimeString(f);
 		var tl = [
-			bkcore.Timer.msToTimeString(l[0]),
-			bkcore.Timer.msToTimeString(l[1]),
-			bkcore.Timer.msToTimeString(l[2])
+			this.gameplay.timer.msToTimeString(l[0]),
+			this.gameplay.timer.msToTimeString(l[1]),
+			this.gameplay.timer.msToTimeString(l[2])
 		];
 
 		if (this.gameover !== null) {
@@ -161,7 +161,7 @@ class HexGL {
 
 	initHUD() {
 		if (!this.displayHUD) return;
-		this.hud = new bkcore.hexgl.HUD({
+		this.hud = new HUD({
 			width: this.width,
 			height: this.height,
 			font: "BebasNeueRegular",
