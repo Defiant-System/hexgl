@@ -169,7 +169,12 @@ class HexGL {
 			speed: this.track.lib.get("images", "hud.speed"),
 			shield: this.track.lib.get("images", "hud.shield")
 		});
-		this.containers.overlay.appendChild(this.hud.canvas);
+
+		let pEl = this.containers.overlay;
+		while (pEl.hasChildNodes()) {
+			pEl.removeChild(pEl.firstChild);
+		}
+		pEl.appendChild(this.hud.canvas);
 	}
 
 	initGameComposer() {
@@ -231,7 +236,7 @@ class HexGL {
 		c.angularSpeed = 0.0125;
 		c.airAngularSpeed = 0.0135;
 		c.rollAngle = 0.6;
-		c.shieldDamage = 0.96;
+		c.shieldDamage = 0.06;
 		c.collisionSpeedDecrease = 0.8;
 		c.collisionSpeedDecreaseCoef = 0.5;
 		c.rollLerp = 0.07;

@@ -100,35 +100,35 @@ class HUD {
 	}
 
 	update(speed, speedRatio, shield, shieldRatio) {
-		var SCREEN_WIDTH = this.width;
-		var SCREEN_HEIGHT = this.height;
-		var SCREEN_HW = SCREEN_WIDTH / 2;
-		var SCREEN_HH = SCREEN_HEIGHT / 2;
+		let SCREEN_WIDTH = this.width,
+			SCREEN_HEIGHT = this.height,
+			SCREEN_HW = SCREEN_WIDTH / 2,
+			SCREEN_HH = SCREEN_HEIGHT / 2;
 
 		if (!this.visible) {
-			this.ctx.clearRect(0 , 0 , SCREEN_WIDTH , SCREEN_HEIGHT);
+			this.ctx.clearRect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 			return;
 		}
 
-		var w = this.bg.width;
-		var h = this.bg.height;
-		var r = h/w;
-		var nw = SCREEN_WIDTH;
-		var nh = nw * r;
-		var oh = SCREEN_HEIGHT - nh;
-		var o = 0;
+		let w = this.bg.width,
+			h = this.bg.height,
+			r = h/w,
+			nw = SCREEN_WIDTH,
+			nh = nw * r,
+			oh = SCREEN_HEIGHT - nh,
+			o = 0,
 		//speedbar
-		var ba = nh;
-		var bl = SCREEN_WIDTH / this.speedBarRatio;
-		var bw = bl * speedRatio;
+			ba = nh,
+			bl = SCREEN_WIDTH / this.speedBarRatio,
+			bw = bl * speedRatio,
 		//shieldbar
-		var sw = SCREEN_WIDTH / this.shieldBarWRatio;
-		var sho = SCREEN_WIDTH / this.shieldBarHRatio;
-		var sh = sho*shieldRatio;
-		var sy = (SCREEN_WIDTH / this.shieldBarYRatio)+sho-sh;
+			sw = SCREEN_WIDTH / this.shieldBarWRatio,
+			sho = SCREEN_WIDTH / this.shieldBarHRatio,
+			sh = sho*shieldRatio,
+			sy = (SCREEN_WIDTH / this.shieldBarYRatio)+sho-sh;
 		
 		if (this.step == 0) {
-			this.ctx.clearRect(0 , oh , SCREEN_WIDTH , nh);
+			this.ctx.clearRect(0, oh, SCREEN_WIDTH, nh);
 
 			if (!this.messageOnly) {
 			    this.ctx.drawImage(this.bg, o, oh, nw, nh);
@@ -156,28 +156,28 @@ class HUD {
 				this.ctx.restore();
 
 				// SPEED
-				this.ctx.font = (SCREEN_WIDTH / this.speedFontRatio)+"px "+this.font;
+				this.ctx.font = (SCREEN_WIDTH / this.speedFontRatio) +"px "+ this.font;
 			    this.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
 			    this.ctx.fillText(speed, SCREEN_HW, SCREEN_HEIGHT - nh*0.57);
 
 			    // SHIELD
-				this.ctx.font = (SCREEN_WIDTH / this.shieldFontRatio)+"px "+this.font;
+				this.ctx.font = (SCREEN_WIDTH / this.shieldFontRatio) +"px "+ this.font;
 			    this.ctx.fillStyle = "rgba(255, 255, 255, 0.4)";
 			    this.ctx.fillText(shield, SCREEN_HW, SCREEN_HEIGHT - nh*0.44);
 			}
 		} else if (this.step == 1) {
-			this.ctx.clearRect(0 , 0 , SCREEN_WIDTH , oh);
+			this.ctx.clearRect(0, 0, SCREEN_WIDTH, oh);
 
 			// TIME
 		    if (this.time != "") {
-				this.ctx.font = (SCREEN_WIDTH / this.timeFontRatio)+"px "+this.font;
+				this.ctx.font = (SCREEN_WIDTH / this.timeFontRatio) +"px "+ this.font;
 			    this.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
 			    this.ctx.fillText(this.time, SCREEN_HW, SCREEN_WIDTH / this.timeMarginRatio);
 			}
 
 			// LAPS
 			if (this.lap != "") {
-				this.ctx.font = (SCREEN_WIDTH / this.timeFontRatio)+"px "+this.font;
+				this.ctx.font = (SCREEN_WIDTH / this.timeFontRatio) +"px "+ this.font;
 			    this.ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
 			    this.ctx.fillText(this.lap, SCREEN_WIDTH-SCREEN_WIDTH / this.lapMarginRatio, SCREEN_WIDTH / this.timeMarginRatio);
 			}
@@ -203,7 +203,7 @@ class HUD {
 
 				this.messagePos += (this.messagePosTarget - this.messagePos) * this.messageLerp;
 
-				this.ctx.font = (SCREEN_WIDTH / this.messageFontRatioEnd)+"px "+this.font;
+				this.ctx.font = (SCREEN_WIDTH / this.messageFontRatioEnd) +"px "+ this.font;
 			    this.ctx.fillStyle = "rgba(255, 255, 255, "+this.messageA+")";
 			    this.ctx.fillText(this.previousMessage, SCREEN_HW, my+this.messagePos);
 			}
@@ -217,7 +217,7 @@ class HUD {
 					this.messageFontRatio = this.messageFontRatioEnd;
 				}
 
-				this.ctx.font = (SCREEN_WIDTH / this.messageFontRatio)+"px "+this.font;
+				this.ctx.font = (SCREEN_WIDTH / this.messageFontRatio) +"px "+ this.font;
 			    this.ctx.fillStyle = "rgba(255, 255, 255, "+this.messageAS+")";
 			    this.ctx.fillText(this.message, SCREEN_HW, my);
 			}
