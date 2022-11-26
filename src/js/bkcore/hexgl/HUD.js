@@ -91,8 +91,8 @@ class HUD {
 		this.lap = "";
 	}
 
-	updateTime(t) {
-		this.time = `${t.m}'${t.s}"${t.ms}`;
+	updateTime(time) {
+		this.time = `${time.m}'${time.s}"${time.ms}`;
 		// this.time = this.sep[0] + time.m + this.sep[1] + time.s + this.sep[2] + time.ms + this.sep[3];
 	}
 
