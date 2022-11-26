@@ -53,7 +53,10 @@ class HexGL {
 	}
 
 	pause() {
+		this.components.shipControls.speed = 0;
 		this.active = false;
+		// UI update
+		hexgl.dispatch({ type: "show-pause", isOn: true });
 	}
 
 	resume() {
@@ -64,6 +67,8 @@ class HexGL {
 				self.update();
 			};
 		raf();
+		// UI update
+		hexgl.dispatch({ type: "show-pause", isOn: false });
 	}
 
 	reset() {

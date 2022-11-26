@@ -307,6 +307,26 @@ content {
 			height: 100%;
 			pointer-events: none;
 		}
+
+		&.show-pause .pause {
+			display: block;
+		}
+
+		.pause {
+			display: none;
+			position: absolute;
+			top: 23px;
+			left: 23px;
+			right: 23px;
+			bottom: 23px;
+			width: auto;
+			height: auto;
+			background-color: rgba(0,0,0,.45);
+			backdrop-filter: blur(21px);
+			color: #fff;
+			font-size: 73px;
+			padding-top: 243px;
+		}
 	}
 
 	.view-game-over {

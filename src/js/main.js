@@ -78,13 +78,14 @@ const hexgl = {
 		// temp
 		els.content.find(".fx").trigger("click");
 
-		// this.dispatch({ type: "show-finish" });
+		// return this.dispatch({ type: "show-pause" });
 		// this.dispatch({ type: "show-pre-game" });
-
-		// setTimeout(() => {
-		// 	this.dispatch({ type: "show-game" });
-		// 	setTimeout(() => game.gameplay.end(2), 500);
-		// }, 500);
+return;
+		setTimeout(() => {
+			this.dispatch({ type: "show-game" });
+			// setTimeout(() => game.gameplay.end(2), 500);
+			// setTimeout(game.pause, 1500);
+		}, 500);
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -118,7 +119,6 @@ const hexgl = {
 						break;
 					case 80: // p - pause
 						if (game.active) {
-							Controls.speed = 0;
 							game.pause();
 						} else {
 							game.resume();
@@ -196,6 +196,9 @@ const hexgl = {
 				window.audio.mute = !value;
 				// update settings
 				Self.settings.fx = value ? false : true;
+				break;
+			case "show-pause":
+				Self.els.content.find(".view-game").toggleClass("show-pause", !event.isOn);
 				break;
 			case "show-pre-game":
 			case "show-game-over":
