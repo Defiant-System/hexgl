@@ -43,8 +43,8 @@ let geometries = {
 let Pref = {
 		"fx": true,
 		"music": true,
-		"best-race": `9'00"0000`,
-		"best-lap": `3'00"0000`,
+		"best-race": 540000,
+		"best-lap": 180000,
 	},
 	els = {
 		content: window.find("content"),
@@ -57,11 +57,10 @@ let Pref = {
 		height: window.innerHeight,
 		container: els.main[0],
 		overlay: els.overlay[0],
-		gameover: els.gameOver,
 		track: "Cityscape",
 		controlType: 0,
 		difficulty: 0,
-		godmode: 0,
+		godmode: 1,
 	});
 
 
@@ -79,15 +78,18 @@ const hexgl = {
 		// temp
 		els.content.find(".fx").trigger("click");
 
-		this.dispatch({ type: "show-pre-game" });
-		setTimeout(() => {
-			this.dispatch({ type: "show-game" });
-			// setTimeout(() => game.gameplay.end(2), 100);
-		}, 400);
+		// this.dispatch({ type: "show-finish" });
+		// this.dispatch({ type: "show-pre-game" });
+
+		// setTimeout(() => {
+		// 	this.dispatch({ type: "show-game" });
+		// 	setTimeout(() => game.gameplay.end(2), 500);
+		// }, 500);
 	},
 	dispatch(event) {
 		let Self = hexgl,
 			Controls = game.components.shipControls,
+			time,
 			value,
 			el;
 		// console.log(event);
@@ -164,10 +166,14 @@ const hexgl = {
 
 			// custom events
 			case "update-best-race-lap":
-				value = Self.settings["best-race"];
+				if (Self.settings["best-race"] !== Pref["best-race"]) {
+					Self.els.content.find(".best-score").addClass("show");
+				}
+				time = new Timer();
+				value = time.valueOf(+Self.settings["best-race"]);
 				Self.els.content.find(`.view-start .best-race span`).html(value);
 
-				value = Self.settings["best-lap"];
+				value = time.valueOf(+Self.settings["best-lap"]);
 				Self.els.content.find(`.view-start .best-lap span`).html(value);
 				break;
 			case "toggle-music":
@@ -192,7 +198,9 @@ const hexgl = {
 				Self.settings.fx = value ? false : true;
 				break;
 			case "show-pre-game":
+			case "show-game-over":
 			case "show-credits":
+			case "show-finish":
 			case "show-start":
 				Self.els.content.prop({ className: event.type });
 				break;
@@ -201,7 +209,6 @@ const hexgl = {
 
 				game.init();
 				game.start();
-
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

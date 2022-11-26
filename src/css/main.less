@@ -152,6 +152,7 @@ content {
 		}
 
 		.best-score {
+			display: none;
 			position: absolute;
 			top: 3%;
 			right: 2%;
@@ -160,6 +161,10 @@ content {
 			font-size: 27px;
 			color: #69c;
 			text-shadow: 0 0 11px #ffffffbb;
+
+			&.show {
+				display: block;
+			}
 
 			> div {
 				display: flex;

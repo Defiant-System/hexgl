@@ -35,7 +35,6 @@ class HexGL {
 		this.containers = {};
 		this.containers.main = opts.container == undefined ? document.body : opts.container;
 		this.containers.overlay = opts.overlay == undefined ? document.body : opts.overlay;
-		this.gameover = opts.gameover == undefined ? null : opts.gameover;
 		this.godmode = opts.godmode == undefined ? false : opts.godmode;
 		this.hud = null;
 		this.gameplay = null;
@@ -125,17 +124,23 @@ class HexGL {
 	displayScore(f, l) {
 		this.active = false;
 
-		var tf = this.gameplay.timer.msToTimeString(f);
-		var tl = [
-			this.gameplay.timer.msToTimeString(l[0]),
-			this.gameplay.timer.msToTimeString(l[1]),
-			this.gameplay.timer.msToTimeString(l[2])
-		];
+		var APP = hexgl,
+			GP = this.gameplay,
+			rt = GP.timer.getElapsedTime(true), // race time
+			bl = GP.timer.getElapsedTime(true); // best lap
 
-		if (this.gameover !== null) {
-			this.gameover.parent().prop({ className: "show-game-over" });
-			this.gameover.find(".game-time").html(`${tf.m}'${tf.s}"${tf.ms}`);
-			return;
+		switch (GP.result) {
+			case GP.results.FINISH:
+				APP.dispatch({ type: "show-finish" });
+				APP.dispatch({ type: "register-time" });
+				APP.els.content.find(".view-finish .race-time span").html(`${rt.m}'${rt.s}"${rt.ms}`);
+				APP.els.content.find(".view-finish .lap-time span").html(`${rt.m}'${rt.s}"${rt.ms}`);
+				break;
+			case GP.results.DESTROYED:
+				APP.dispatch({ type: "show-game-over" });
+				APP.els.content.prop({ className: "show-game-over" });
+				APP.els.content.find(".game-time").html(`${rt.m}'${rt.s}"${rt.ms}`);
+				break;
 		}
 	}
 

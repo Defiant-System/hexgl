@@ -67,4 +67,9 @@ class Timer {
 		return time;
 	}
 
+	valueOf(t) {
+		let rt = t.constructor === Number ? this.msToTimeString(t) : t;
+		return `${rt.m}'${rt.s}"${rt.ms}`;
+	}
+
 }
