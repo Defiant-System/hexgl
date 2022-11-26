@@ -43,17 +43,16 @@ class Timer {
 	}
 
 	// Returns a formatted version of the current elapsed time using msToTime().
-	getElapsedTime() {
-		return this.msToTime(this.time.elapsed);
+	getElapsedTime(formated) {
+		return formated ? this.msToTimeString(this.time.elapsed) : this.msToTime(this.time.elapsed);
 	}
 
 	msToTime(t) {
-		let h, m, ms, s;
-		ms = t % 1000;
-		s = Math.floor((t / 1000) % 60);
-		m = Math.floor((t / 60000) % 60);
-		h = Math.floor(t / 3600000);
-		return { h, m, s, ms, ms };
+		let ms = t % 1000,
+			s = Math.floor((t / 1000) % 60),
+			m = Math.floor((t / 60000) % 60),
+			h = Math.floor(t / 3600000);
+		return { h, m, s, ms, t };
 	}
 
 	// Formats a millisecond integer into a h/m/s/ms object with prefix zeros

@@ -11,7 +11,6 @@ class HexGL {
 	
 	constructor(opts) {
 		this.active = true;
-		this.displayHUD = opts.hud == undefined ? true : opts.hud;
 		this.width = opts.width == undefined ? window.innerWidth : opts.width;
 		this.height = opts.height == undefined ? window.innerHeight : opts.height;
 		this.difficulty = opts.difficulty == undefined ? 0 : opts.difficulty;
@@ -21,7 +20,6 @@ class HexGL {
 		this.controlType = opts.controlType == undefined ? 1 : opts.controlType;
 		
 		// desktop + mid or high quality => 3 (VERY HIGH)
-		this.quality = opts.quality == undefined ? 3 : opts.quality;
 		this.settings = null;
 		this.renderer = null;
 		this.manager = null;
@@ -86,14 +84,22 @@ class HexGL {
 	}
 
 	init() {
-		this.initHUD();
-		this.track.buildMaterials(this.quality);
-		this.track.buildScenes(this, this.quality);
+		this.hud = new HUD({
+			width: this.width,
+			height: this.height,
+			font: "BebasNeueRegular",
+			canvas: this.containers.overlay,
+			bg: this.track.lib.get("images", "hud.bg"),
+			speed: this.track.lib.get("images", "hud.speed"),
+			shield: this.track.lib.get("images", "hud.shield")
+		});
+		this.track.buildMaterials();
+		this.track.buildScenes(this);
 		this.initGameComposer();
 	}
 
 	load(opts) {
-		this.track.load(opts, this.quality);
+		this.track.load(opts);
 	}
 
 	initGameplay() {
@@ -128,7 +134,7 @@ class HexGL {
 
 		if (this.gameover !== null) {
 			this.gameover.parent().prop({ className: "show-game-over" });
-			this.gameover.find(".game-time").html(`${tf.m}'${tf.s}''${tf.ms}`);
+			this.gameover.find(".game-time").html(`${tf.m}'${tf.s}"${tf.ms}`);
 			return;
 		}
 	}
@@ -140,13 +146,11 @@ class HexGL {
 		});
 
 		// desktop + quality mid or high
-		if (this.quality > 2) {
-			renderer.physicallyBasedShading = true;
-			renderer.gammaInput = true;
-			renderer.gammaOutput = true;
-			renderer.shadowMapEnabled = true;
-			renderer.shadowMapSoft = true;
-		}
+		renderer.physicallyBasedShading = true;
+		renderer.gammaInput = true;
+		renderer.gammaOutput = true;
+		renderer.shadowMapEnabled = true;
+		renderer.shadowMapSoft = true;
 
 		renderer.autoClear = false;
 		renderer.sortObjects = false;
@@ -157,24 +161,6 @@ class HexGL {
 		this.canvas = renderer.domElement;
 		this.renderer = renderer;
 		this.manager = new RenderManager(renderer);
-	}
-
-	initHUD() {
-		if (!this.displayHUD) return;
-		this.hud = new HUD({
-			width: this.width,
-			height: this.height,
-			font: "BebasNeueRegular",
-			bg: this.track.lib.get("images", "hud.bg"),
-			speed: this.track.lib.get("images", "hud.speed"),
-			shield: this.track.lib.get("images", "hud.shield")
-		});
-
-		let pEl = this.containers.overlay;
-		while (pEl.hasChildNodes()) {
-			pEl.removeChild(pEl.firstChild);
-		}
-		pEl.appendChild(this.hud.canvas);
 	}
 
 	initGameComposer() {
@@ -216,10 +202,8 @@ class HexGL {
 		parent.add(mesh);
 
 		// desktop + quality mid or high
-		if (this.quality > 2) {
-			mesh.castShadow = true;
-			mesh.receiveShadow = true;
-		}
+		mesh.castShadow = true;
+		mesh.receiveShadow = true;
 
 		return mesh;
 	}

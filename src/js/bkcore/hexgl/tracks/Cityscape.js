@@ -30,7 +30,7 @@ bkcore.hexgl.tracks.Cityscape = {
 	},
 	analyser: null,
 	pixelRatio: 2048.0 / 6000.0,
-	load(opts, quality) {
+	load(opts) {
 		this.lib = new Loader(opts);
 
 		this.lib.load({
@@ -74,7 +74,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			}
 		});
 	},
-	buildMaterials(quality) {
+	buildMaterials() {
 		this.materials.track = Utils.createNormalMaterial({
 			diffuse: this.lib.get("textures", "track.cityscape.diffuse"),
 			specular: this.lib.get("textures", "track.cityscape.specular"),
@@ -154,7 +154,7 @@ bkcore.hexgl.tracks.Cityscape = {
 			transparent: false
 		});
 	},
-	buildScenes(ctx, quality) {
+	buildScenes(ctx) {
 		// IMPORTANT
 		this.analyser = this.lib.get("analysers", "track.cityscape.collision");
 
@@ -199,20 +199,18 @@ bkcore.hexgl.tracks.Cityscape = {
 		sun.lookAt(new THREE.Vector3());
 
 		// desktop + quality mid or high
-		if(quality > 2) {
-			sun.castShadow = true;
-			sun.shadowCameraNear = 50;
-			sun.shadowCameraFar = camera.far*2;
-			sun.shadowCameraRight = 3000;
-			sun.shadowCameraLeft = -3000;
-			sun.shadowCameraTop = 3000;
-			sun.shadowCameraBottom = -3000;
-			//sun.shadowCameraVisible = true;
-			sun.shadowBias = 0.0001;
-			sun.shadowDarkness = 0.7;
-			sun.shadowMapWidth = 2048;
-			sun.shadowMapHeight = 2048;
-		}
+		sun.castShadow = true;
+		sun.shadowCameraNear = 50;
+		sun.shadowCameraFar = camera.far*2;
+		sun.shadowCameraRight = 3000;
+		sun.shadowCameraLeft = -3000;
+		sun.shadowCameraTop = 3000;
+		sun.shadowCameraBottom = -3000;
+		//sun.shadowCameraVisible = true;
+		sun.shadowBias = 0.0001;
+		sun.shadowDarkness = 0.7;
+		sun.shadowMapWidth = 2048;
+		sun.shadowMapHeight = 2048;
 		scene.add( sun );
 
 		// SHIP
@@ -261,11 +259,9 @@ bkcore.hexgl.tracks.Cityscape = {
 		};
 		
 		// desktop + quality mid or high
-		if (quality > 2) {
-			fxParams.textureCloud = this.lib.get("textures", "cloud");
-			fxParams.textureSpark = this.lib.get("textures", "spark");
-			fxParams.useParticles = true;
-		}
+		fxParams.textureCloud = this.lib.get("textures", "cloud");
+		fxParams.textureSpark = this.lib.get("textures", "spark");
+		fxParams.useParticles = true;
 		ctx.components.shipEffects = new ShipEffects(fxParams);
 
 		// TRACK
@@ -319,7 +315,6 @@ bkcore.hexgl.tracks.Cityscape = {
 			components: ctx.components,
 			composers: ctx.composers,
 			extras: ctx.extras,
-			quality: quality,
 			hud: ctx.hud,
 			time: 0.0,
 			lowFPS: 0

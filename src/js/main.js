@@ -49,7 +49,7 @@ let Pref = {
 	els = {
 		content: window.find("content"),
 		gameOver: window.find(".view-game-over"),
-		overlay: window.find(".overlay"),
+		overlay: window.find(".overlay canvas"),
 		main: window.find(".main"),
 	},
 	game = new bkcore.hexgl.HexGL({
@@ -61,9 +61,7 @@ let Pref = {
 		track: "Cityscape",
 		controlType: 0,
 		difficulty: 0,
-		quality: 3,
 		godmode: 0,
-		hud: 1,
 	});
 
 

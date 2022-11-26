@@ -8,7 +8,7 @@ class HUD {
 		this.width = opts.width;
 		this.height = opts.height;
 
-		this.canvas = document.createElement('canvas');
+		this.canvas = opts.canvas;
 		this.canvas.width = this.width;
 		this.canvas.height = this.height;
 
@@ -54,7 +54,7 @@ class HUD {
 		this.lap = "";
 		this.lapSeparator = "/";
 
-		this.timeSeparators = ["","'", "''",""];
+		this.sep = [``,`'`, `"`,``];
 
 		this.step = 0;
 		this.maxStep = 2;
@@ -91,8 +91,9 @@ class HUD {
 		this.lap = "";
 	}
 
-	updateTime(time) {
-		this.time = this.timeSeparators[0] + time.m + this.timeSeparators[1] + time.s + this.timeSeparators[2] + time.ms + this.timeSeparators[3];
+	updateTime(t) {
+		this.time = `${t.m}'${t.s}"${t.ms}`;
+		// this.time = this.sep[0] + time.m + this.sep[1] + time.s + this.sep[2] + time.ms + this.sep[3];
 	}
 
 	resetTime() {

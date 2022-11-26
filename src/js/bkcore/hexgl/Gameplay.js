@@ -35,7 +35,7 @@ class Gameplay {
 		this.modes = {
 			timeattack: () => {
 				this.raceData.tick(this.timer.time.elapsed);
-				this.hud != null && this.hud.updateTime(this.timer.getElapsedTime());
+				this.hud != null && this.hud.updateTime(this.timer.getElapsedTime(true));
 				var cp = this.checkPoint();
 
 				if (cp == this.track.checkpoints.start && this.previousCheckPoint == this.track.checkpoints.last) {
