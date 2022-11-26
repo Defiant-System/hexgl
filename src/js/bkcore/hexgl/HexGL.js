@@ -52,6 +52,11 @@ class HexGL {
 		this.initGameplay();
 	}
 
+	stop() {
+		this.components.shipControls.speed = 0;
+		this.active = false;
+	}
+
 	pause() {
 		this.components.shipControls.speed = 0;
 		this.active = false;

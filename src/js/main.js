@@ -113,7 +113,8 @@ return;
 				// keyboard controls; DOWN state
 				switch (event.keyCode) {
 					case 27: // escape
-						game.reset();
+						Self.dispatch({ type: "show-start" });
+						game.stop();
 						break;
 					case 77: // m - mute
 						break;
