@@ -56,7 +56,7 @@ class RenderManager {
 		if (id in this.renders) {
 			this.current = this.renders[id];
 		} else {
-			console.warn('RenderManager: Render "'+id+'" not found.');
+			console.warn('RenderManager: Render "'+ id +'" not found.');
 		}
 	}
 

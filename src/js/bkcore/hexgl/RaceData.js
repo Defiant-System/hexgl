@@ -53,8 +53,6 @@ class RaceData {
 
 		// no interpolation
 		if (this.seek == this.last) {
-			this.reset();
-			this.shipControls.teleport(this._pp, this._pq);
 			return hexgl.dispatch({ type: "reset-to-start-view" });
 		} else if (this.seek == 0) {
 			this.shipControls.teleport(this._pp, this._pq);

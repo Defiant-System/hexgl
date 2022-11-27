@@ -38,8 +38,9 @@ let geometries = {
 @import "bkcore/hexgl/tracks/Cityscape.js"
 @import "bkcore/hexgl/HexGL.js"
 
-let replay = @import "replays/hbi.json";
 
+// replay data
+let replay = @import "replay.json";
 
 // default settings
 let Pref = {
@@ -54,7 +55,7 @@ let Pref = {
 		overlay: window.find(".overlay canvas"),
 		main: window.find(".main"),
 	},
-	game = new bkcore.hexgl.HexGL({
+	game = new HexGL({
 		width: window.innerWidth,
 		height: window.innerHeight,
 		container: els.main[0],
@@ -76,11 +77,9 @@ const hexgl = {
 		this.dispatch({ type: "update-best-race-lap" });
 
 		// temp
-		els.content.find(".fx").trigger("click");
+		// els.content.find(".fx").trigger("click");
 
-		// setTimeout(() => {
-		// 	this.dispatch({ type: "show-game" });
-		// }, 500);
+		setTimeout(() => this.dispatch({ type: "replay-race" }), 100);
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -159,8 +158,27 @@ const hexgl = {
 				break;
 
 			// custom events
+			case "save-race":
+				let file = new karaqu.File({ kind: "json" });
+				// save race data as JSON file
+				window.dialog.saveAs(file, {
+					json:  () => {
+						let data = game.gameplay.raceData.export();
+						return JSON.stringify(data);
+					},
+				});
+				break;
+			case "replay-race":
+				Self.dispatch({ type: "show-game", mode: "replay" });
+				break;
+			case "toggle-god-mode":
+				game.godmode = !game.godmode;
+				if (game.godmode) event.xMenu.setAttribute("is-checked", 1);
+				else event.xMenu.removeAttribute("is-checked");
+				break;
 			case "reset-to-start-view":
 				Self.dispatch({ type: "show-start" });
+				game.gameplay.raceData.seek = 0;
 				game.stop();
 				break;
 			case "toggle-music":
@@ -218,9 +236,8 @@ const hexgl = {
 				break;
 			case "show-game":
 				Self.els.content.prop({ className: event.type });
-
 				game.init();
-				game.start();
+				game.start(event.mode);
 				break;
 			case "open-help":
 				karaqu.shell("fs -u '~/help/index.md'");

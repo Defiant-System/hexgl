@@ -2,12 +2,9 @@
 	<Menu name="HexGL">
 		<Menu name="About HexGL" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Quality">
-			<Menu name="Low" click="set-hexgl-quality" arg="0" check-group="hexgl-quality"/>
-			<Menu name="Medium" click="set-hexgl-quality" arg="1" check-group="hexgl-quality"/>
-			<Menu name="High" click="set-hexgl-quality" arg="2" check-group="hexgl-quality"/>
-			<Menu name="Very High" click="set-hexgl-quality" arg="3" check-group="hexgl-quality" is-checked="1"/>
-		</Menu>
+		<Menu name="Replay" click="replay-race"/>
+		<Menu name="Save Race" click="save-race"/>
+		<Menu type="divider"/>
 		<Menu name="God Mode" click="toggle-god-mode"/>
 		<Menu type="divider"/>
 		<Menu name="Quit HexGL" shell="win -c"/>

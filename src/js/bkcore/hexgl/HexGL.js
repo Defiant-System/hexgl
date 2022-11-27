@@ -33,7 +33,7 @@ class HexGL {
 		this.containers = {};
 		this.containers.main = opts.container == undefined ? document.body : opts.container;
 		this.containers.overlay = opts.overlay == undefined ? document.body : opts.overlay;
-		this.godmode = opts.godmode == undefined ? false : opts.godmode;
+		this._godmode = opts.godmode == undefined ? false : opts.godmode;
 		this.hud = null;
 		this.gameplay = null;
 
@@ -44,14 +44,23 @@ class HexGL {
 		this.initRenderer();
 	}
 
-	start() {
+	get godmode() {
+		return this._godmode;
+	}
+
+	set godmode(value) {
+		this._godmode = value;
+		this.tweakShipControls();
+	}
+
+	start(mode="timeattack") {
 		this.manager.setCurrent("game");
 		this.resume();
 		// init game play;
 		this.gameplay = new Gameplay({
 			hud: this.hud,
 			mode: this.mode,
-			mode: "replay",
+			mode,
 			shipControls: this.components.shipControls,
 			cameraControls: this.components.cameraChase,
 			analyser: this.track.analyser,
@@ -176,8 +185,13 @@ class HexGL {
 	}
 
 	initGameComposer() {
-		var renderTargetParameters = { minFilter: THREE.LinearFilter, magFilter: THREE.LinearFilter, format: THREE.RGBFormat, stencilBuffer: false };
-		var renderTarget = new THREE.WebGLRenderTarget( this.width, this.height, renderTargetParameters );
+		var renderTargetParameters = {
+				minFilter: THREE.LinearFilter,
+				magFilter: THREE.LinearFilter,
+				format: THREE.RGBFormat,
+				stencilBuffer: false
+			},
+			renderTarget = new THREE.WebGLRenderTarget(this.width, this.height, renderTargetParameters);
 
 		// GAME COMPOSER
 		var renderSky = new THREE.RenderPass( this.manager.get("sky").scene, this.manager.get("sky").camera );
@@ -185,11 +199,11 @@ class HexGL {
 		renderModel.clear = false;
 
 		var effectHex = new THREE.ShaderPass( Shaders[ "hexvignette" ] );
-		effectHex.uniforms[ "size" ].value = 512.0 * (this.width/1633);
-		effectHex.uniforms[ "rx" ].value = this.width;
-		effectHex.uniforms[ "ry" ].value = this.height;
-		effectHex.uniforms[ "tHex" ].texture = this.track.lib.get("textures", "hex");
-		effectHex.uniforms[ "color" ].value = this.extras.vignetteColor;
+		effectHex.uniforms["size"].value = 512.0 * (this.width/1633);
+		effectHex.uniforms["rx"].value = this.width;
+		effectHex.uniforms["ry"].value = this.height;
+		effectHex.uniforms["tHex"].texture = this.track.lib.get("textures", "hex");
+		effectHex.uniforms["color"].value = this.extras.vignetteColor;
 		effectHex.renderToScreen = true;
 
 		var effectBloom = new THREE.BloomPass( 0.8, 25, 4, 256);
@@ -239,11 +253,7 @@ class HexGL {
 		c.driftLerp = 0.3;
 		c.angularLerp = 0.4;
 
-		if (this.godmode) c.shieldDamage = 0.0;
+		if (this._godmode) c.shieldDamage = 0.0;
 	}
 
 }
-
-var bkcore = bkcore || {};
-bkcore.hexgl = bkcore.hexgl || {};
-bkcore.hexgl.HexGL = HexGL;
