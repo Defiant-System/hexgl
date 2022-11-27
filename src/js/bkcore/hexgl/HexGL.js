@@ -13,11 +13,9 @@ class HexGL {
 		this.active = true;
 		this.width = opts.width == undefined ? window.innerWidth : opts.width;
 		this.height = opts.height == undefined ? window.innerHeight : opts.height;
-		this.difficulty = opts.difficulty == undefined ? 0 : opts.difficulty;
 		this.player = opts.player == undefined ? "Anonym" : opts.player;
 		this.track = bkcore.hexgl.tracks[ opts.track == undefined ? "Cityscape" : opts.track ];
 		this.mode = opts.mode == undefined ? "timeattack" : opts.mode;
-		this.controlType = opts.controlType == undefined ? 1 : opts.controlType;
 		
 		// desktop + mid or high quality => 3 (VERY HIGH)
 		this.settings = null;
@@ -112,8 +110,7 @@ class HexGL {
 	}
 
 	initGameplay() {
-		var self = this;
-
+		// new game play object
 		this.gameplay = new Gameplay({
 			hud: this.hud,
 			mode: this.mode,
@@ -122,34 +119,37 @@ class HexGL {
 			analyser: this.track.analyser,
 			pixelRatio: this.track.pixelRatio,
 			track: this.track,
-			onFinish: function() {
-				self.components.shipControls.terminate();
-				self.displayScore(this.finishTime, this.lapTimes);
+			onFinish: () => {
+				this.components.shipControls.terminate();
+				this.displayScore(this.gameplay.finishTime, this.gameplay.lapTimes);
 			}
 		});
-		// temp
+		// start countdown
 		this.gameplay.start();
 	}
 
 	displayScore(f, l) {
-		this.active = false;
-
 		var APP = hexgl,
 			GP = this.gameplay,
-			rt = GP.timer.getElapsedTime(true), // race time
-			bl = GP.timer.getElapsedTime(true); // best lap
-
+			T = new Timer;
+		// stop raf
+		this.active = false;
+		// result type
 		switch (GP.result) {
 			case GP.results.FINISH:
+				let finishTime = T.valueOf(GP.finishTime),
+					fastest = Math.min(...GP.lapTimes),
+					bestLap = T.valueOf(fastest);
 				APP.dispatch({ type: "show-finish" });
-				APP.dispatch({ type: "register-time" });
-				APP.els.content.find(".view-finish .race-time span").html(`${rt.m}'${rt.s}"${rt.ms}`);
-				APP.els.content.find(".view-finish .lap-time span").html(`${rt.m}'${rt.s}"${rt.ms}`);
+				APP.dispatch({ type: "register-time", finish: GP.finishTime, fastest });
+				APP.els.content.find(".view-finish .race-time span").html(finishTime);
+				APP.els.content.find(".view-finish .lap-time span").html(bestLap);
 				break;
 			case GP.results.DESTROYED:
+				let raceTime = T.valueOf(GP.timer.time.elapsed);
 				APP.dispatch({ type: "show-game-over" });
 				APP.els.content.prop({ className: "show-game-over" });
-				APP.els.content.find(".game-time").html(`${rt.m}'${rt.s}"${rt.ms}`);
+				APP.els.content.find(".game-time").html(raceTime);
 				break;
 		}
 	}

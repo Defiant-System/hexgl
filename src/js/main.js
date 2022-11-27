@@ -58,9 +58,7 @@ let Pref = {
 		container: els.main[0],
 		overlay: els.overlay[0],
 		track: "Cityscape",
-		controlType: 0,
-		difficulty: 0,
-		godmode: 1,
+		godmode: 0,
 	});
 
 
@@ -69,7 +67,7 @@ const hexgl = {
 		// fast references
 		this.els = els;
 		// get settings, if any
-		this.settings = window.settings.getItem("settings") || Pref;
+		this.settings = window.settings.getItem("settings") || { ...Pref };
 		// enable start button when resources are done loading
 		game.load({ onLoad: () => els.content.find(".menu .start.disabled").removeClass("disabled") });
 		// best rece / lap values
@@ -80,12 +78,13 @@ const hexgl = {
 
 		// return this.dispatch({ type: "show-pause" });
 		// this.dispatch({ type: "show-pre-game" });
-return;
-		setTimeout(() => {
-			this.dispatch({ type: "show-game" });
-			// setTimeout(() => game.gameplay.end(2), 500);
-			// setTimeout(game.pause, 1500);
-		}, 500);
+
+		// setTimeout(() => {
+		// 	this.dispatch({ type: "show-game" });
+		// 	// setTimeout(() => game.gameplay.end(2), 500);
+
+		// 	setTimeout(() => game.gameplay.simu(), 1000);
+		// }, 100);
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -98,13 +97,12 @@ return;
 			// system events
 			case "window.close":
 				// save settings
-				// window.settings.setItem("settings", Self.settings);
-				break;
-			case "window.focus":
+				if (Self.saveSettings) {
+					window.settings.setItem("settings", Self.settings);
+				}
 				break;
 			case "window.blur":
 				if (Controls) {
-					Controls.speed = 0;
 					game.pause();
 				}
 				break;
@@ -166,17 +164,6 @@ return;
 				break;
 
 			// custom events
-			case "update-best-race-lap":
-				if (Self.settings["best-race"] !== Pref["best-race"]) {
-					Self.els.content.find(".best-score").addClass("show");
-				}
-				time = new Timer();
-				value = time.valueOf(+Self.settings["best-race"]);
-				Self.els.content.find(`.view-start .best-race span`).html(value);
-
-				value = time.valueOf(+Self.settings["best-lap"]);
-				Self.els.content.find(`.view-start .best-lap span`).html(value);
-				break;
 			case "toggle-music":
 				value = window.midi.playing;
 				if (value) {
@@ -197,6 +184,28 @@ return;
 				window.audio.mute = !value;
 				// update settings
 				Self.settings.fx = value ? false : true;
+				break;
+			case "register-time":
+				if (Self.settings["best-race"] > event.finish) {
+					Self.settings["best-race"] = event.finish;
+					Self.saveSettings = true;
+				}
+				if (Self.settings["best-lap"] > event.fastest) {
+					Self.settings["best-lap"] = event.fastest;
+					Self.saveSettings = true;
+				}
+				Self.dispatch({ type: "update-best-race-lap" });
+				break;
+			case "update-best-race-lap":
+				if (Self.settings["best-race"] !== Pref["best-race"]) {
+					Self.els.content.find(".best-score").addClass("show");
+				}
+				time = new Timer();
+				value = time.valueOf(+Self.settings["best-race"]);
+				Self.els.content.find(`.view-start .best-race span`).html(value);
+
+				value = time.valueOf(+Self.settings["best-lap"]);
+				Self.els.content.find(`.view-start .best-lap span`).html(value);
 				break;
 			case "show-pause":
 				Self.els.content.find(".view-game").toggleClass("show-pause", !event.isOn);

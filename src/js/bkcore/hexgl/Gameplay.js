@@ -2,8 +2,8 @@
 class Gameplay {
 	
 	constructor(opts) {
-		this.startDelay = opts.hud == null ? 0 : 100;
-		this.countDownDelay = opts.hud == null ? 1000 : 500;
+		this.startDelay = 500;
+		this.countDownDelay = 750;
 
 		this.active = false;
 		this.timer = new Timer();
@@ -24,11 +24,10 @@ class Gameplay {
 		};
 		this.result = this.results.NONE;
 
-		this.lap = 1;
+		this.lap = 0;
 		this.lapTimes = [];
 		this.lapTimeElapsed = 0;
 		this.maxLaps = 3;
-		this.score = null;
 		this.finishTime = null;
 		this.onFinish = opts.onFinish;
 
@@ -44,6 +43,9 @@ class Gameplay {
 					this.lapTimes.push(t - this.lapTimeElapsed);
 					this.lapTimeElapsed = t;
 
+					// reset shield when passing checkpoint
+					this.shipControls.shield = this.shipControls.maxShield;
+
 					if (this.lap == this.maxLaps) {
 						this.end(this.results.FINISH);
 					} else {
@@ -52,11 +54,13 @@ class Gameplay {
 
 						if (this.lap == this.maxLaps) {
 							this.hud != null && this.hud.display("Final lap", 0.5);
+						} else {
+							this.hud.display("Checkpoint", 0.5);
 						}
 					}
 				} else if (cp != -1 && cp != this.previousCheckPoint) {
 					this.previousCheckPoint = cp;
-					//this.hud.display("Checkpoint", 0.5);
+					// this.hud.display("Checkpoint", 0.5);
 				}
 
 				if (this.shipControls.destroyed == true) {
@@ -75,21 +79,10 @@ class Gameplay {
 		this.mode = opts.mode == undefined || !(opts.mode in this.modes) ? "timeattack" : opts.mode;
 		this.raceData = null;
 		this.step = 0;
-
-	}
-
-	simu() {
-		this.lapTimes = [92300, 91250, 90365];
-		this.finishTime = this.lapTimes[0] + this.lapTimes[1] + this.lapTimes[2];
-		if (this.hud != null) this.hud.display("Finish");
-		this.step = 100;
-		this.result = this.results.FINISH;
-		this.shipControls.active = false;
 	}
 
 	start(opts) {
 		this.finishTime = null;
-		this.score = null;
 		this.lap = 1;
 
 		this.shipControls.reset(this.track.spawn, this.track.spawnRotation);
@@ -125,7 +118,6 @@ class Gameplay {
 	}
 
 	end(result) {
-		this.score = this.timer.getElapsedTime();
 		this.finishTime = this.timer.time.elapsed;
 		this.timer.start();
 		this.result = result;
