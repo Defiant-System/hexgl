@@ -47,7 +47,23 @@ class HexGL {
 	start() {
 		this.manager.setCurrent("game");
 		this.resume();
-		this.initGameplay();
+		// init game play;
+		this.gameplay = new Gameplay({
+			hud: this.hud,
+			mode: this.mode,
+			mode: "replay",
+			shipControls: this.components.shipControls,
+			cameraControls: this.components.cameraChase,
+			analyser: this.track.analyser,
+			pixelRatio: this.track.pixelRatio,
+			track: this.track,
+			onFinish: () => {
+				this.components.shipControls.terminate();
+				this.displayScore(this.gameplay.finishTime, this.gameplay.lapTimes);
+			}
+		});
+		// start countdown
+		this.gameplay.start();
 	}
 
 	stop() {
@@ -107,25 +123,6 @@ class HexGL {
 
 	load(opts) {
 		this.track.load(opts);
-	}
-
-	initGameplay() {
-		// new game play object
-		this.gameplay = new Gameplay({
-			hud: this.hud,
-			mode: this.mode,
-			shipControls: this.components.shipControls,
-			cameraControls: this.components.cameraChase,
-			analyser: this.track.analyser,
-			pixelRatio: this.track.pixelRatio,
-			track: this.track,
-			onFinish: () => {
-				this.components.shipControls.terminate();
-				this.displayScore(this.gameplay.finishTime, this.gameplay.lapTimes);
-			}
-		});
-		// start countdown
-		this.gameplay.start();
 	}
 
 	displayScore(f, l) {

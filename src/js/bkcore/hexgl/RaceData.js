@@ -47,12 +47,16 @@ class RaceData {
 		this._pq.set(prev[4], prev[5], prev[6], prev[7]);
 
 		if (this.seek < 0) {
-			console.warn('Bad race data.');
+			console.warn("Bad race data.");
 			return;
 		}
 
 		// no interpolation
-		if (this.seek == this.last || this.seek == 0) {
+		if (this.seek == this.last) {
+			this.reset();
+			this.shipControls.teleport(this._pp, this._pq);
+			return hexgl.dispatch({ type: "reset-to-start-view" });
+		} else if (this.seek == 0) {
 			this.shipControls.teleport(this._pp, this._pq);
 		}
 
@@ -79,7 +83,6 @@ class RaceData {
 	import(imp) {
 		this.data = imp;
 		this.last = this.data.length-1;
-		console.log(this.data);
 	}
 
 }

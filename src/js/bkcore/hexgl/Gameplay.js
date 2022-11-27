@@ -94,16 +94,7 @@ class Gameplay {
 			this.cameraControls.mode = this.cameraControls.modes.ORBIT;
 			if (this.hud != null) this.hud.messageOnly = true;
 
-			try {
-				var d = localStorage[`race-${this.track.name}-replay`];
-				if (d == undefined) {
-					console.error(`No replay data for race-${this.track.name}-replay.`);
-					return false;
-				}
-				this.raceData.import( JSON.parse(d) );
-			} catch(e) {
-				console.error('Bad replay format : '+e); return false;
-			}
+			this.raceData.import(replay);
 		}
 
 		this.active = true;
@@ -130,6 +121,8 @@ class Gameplay {
 			if (this.hud != null) this.hud.display("Destroyed", 2);
 			this.step = 100;
 		}
+
+		// console.log( JSON.stringify( this.raceData.export() ) );
 	}
 
 	update() {

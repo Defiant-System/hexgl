@@ -38,6 +38,8 @@ let geometries = {
 @import "bkcore/hexgl/tracks/Cityscape.js"
 @import "bkcore/hexgl/HexGL.js"
 
+let replay = @import "replays/hbi.json";
+
 
 // default settings
 let Pref = {
@@ -76,15 +78,9 @@ const hexgl = {
 		// temp
 		els.content.find(".fx").trigger("click");
 
-		// return this.dispatch({ type: "show-pause" });
-		// this.dispatch({ type: "show-pre-game" });
-
 		// setTimeout(() => {
 		// 	this.dispatch({ type: "show-game" });
-		// 	// setTimeout(() => game.gameplay.end(2), 500);
-
-		// 	setTimeout(() => game.gameplay.simu(), 1000);
-		// }, 100);
+		// }, 500);
 	},
 	dispatch(event) {
 		let Self = hexgl,
@@ -111,8 +107,7 @@ const hexgl = {
 				// keyboard controls; DOWN state
 				switch (event.keyCode) {
 					case 27: // escape
-						Self.dispatch({ type: "show-start" });
-						game.stop();
+						Self.dispatch({ type: "reset-to-start-view" });
 						break;
 					case 77: // m - mute
 						break;
@@ -164,6 +159,10 @@ const hexgl = {
 				break;
 
 			// custom events
+			case "reset-to-start-view":
+				Self.dispatch({ type: "show-start" });
+				game.stop();
+				break;
 			case "toggle-music":
 				value = window.midi.playing;
 				if (value) {
