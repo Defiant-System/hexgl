@@ -122,7 +122,7 @@ class Gameplay {
 			this.step = 100;
 		}
 
-		// console.log( JSON.stringify( this.raceData.export() ) );
+		replay = this.raceData.export();
 	}
 
 	update() {

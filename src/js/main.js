@@ -77,9 +77,10 @@ const hexgl = {
 		this.dispatch({ type: "update-best-race-lap" });
 
 		// temp
-		// els.content.find(".fx").trigger("click");
+		els.content.find(".fx").trigger("click");
 
-		setTimeout(() => this.dispatch({ type: "replay-race" }), 100);
+		// setTimeout(() => this.dispatch({ type: "replay-race" }), 100);
+		// setTimeout(() => karaqu.shell("win -a"), 300);
 	},
 	dispatch(event) {
 		let Self = hexgl,
