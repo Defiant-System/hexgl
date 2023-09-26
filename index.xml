@@ -1,7 +1,7 @@
 <Application>
 	<Head>
 		<meta name="id" value="hexgl"/>
-		<meta name="title" value="HexGL" version="1.12"/>
+		<meta name="title" value="HexGL" version="1.13"/>
 		<meta name="author" value="Thibaut Despoulain" namespace="ant" ported="Hakan Bilgin"/>
 		<meta name="license" value="AGPL-3.0"/>
 		<meta name="repository" value="https://github.com/Defiant-System/hexgl"/>

@@ -38,6 +38,8 @@ let geometries = {
 @import "bkcore/hexgl/tracks/Cityscape.js"
 @import "bkcore/hexgl/HexGL.js"
 
+@import "modules/test.js"
+
 
 // replay data
 let replay = @import "replay.json";
@@ -79,8 +81,9 @@ const hexgl = {
 		// temp
 		els.content.find(".fx").trigger("click");
 
-		// setTimeout(() => this.dispatch({ type: "replay-race" }), 100);
-		// setTimeout(() => karaqu.shell("win -a"), 300);
+		// DEV-ONLY-START
+		Test.init(this);
+		// DEV-ONLY-END
 	},
 	dispatch(event) {
 		let Self = hexgl,
