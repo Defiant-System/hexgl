@@ -74,16 +74,18 @@ const hexgl = {
 		// get settings, if any
 		this.settings = window.settings.getItem("settings") || { ...Pref };
 		// enable start button when resources are done loading
-		game.load({ onLoad: () => els.content.find(".menu .start.disabled").removeClass("disabled") });
+		game.load({ onLoad: () => {
+			els.content.find(".menu .start.disabled").removeClass("disabled");
+			
+			// DEV-ONLY-START
+			Test.init(this);
+			// DEV-ONLY-END
+		}});
 		// best rece / lap values
 		this.dispatch({ type: "update-best-race-lap" });
-
+		
 		// temp
-		els.content.find(".fx").trigger("click");
-
-		// DEV-ONLY-START
-		Test.init(this);
-		// DEV-ONLY-END
+		// els.content.find(".fx").trigger("click");
 	},
 	dispatch(event) {
 		let Self = hexgl,

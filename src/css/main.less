@@ -259,7 +259,7 @@ content {
 
 			.row {
 				// background: rgba(255,255,255,.1);
-				margin: 5px auto;
+				margin: 5px auto 7px;
 				width: 320px;
 				display: flex;
 
@@ -282,23 +282,49 @@ content {
 		}
 
 		.key {
-			background: #fff;
-			color: #000;
+			background: #b5a182;
+			color: #fff;
+			position: relative;
 			display: inline-block;
 			width: 51px;
 			height: 51px;
-			border-radius: 9px;
+			border-radius: 7px;
 			text-align: center;
 			padding-top: 5px;
 			font-size: 48px;
 			margin: 0 7px 0 0;
-			background-position: 8px 8px;
-			background-size: 43px 43px;
-			background-repeat: no-repeat;
+			text-shadow: 0 1px 2px rgba(#111,.45);
+			box-shadow: 0px 5px 0px #978965;
 
-			&.icon-arrow-left  { background-image: url(~/icons/icon-arrow-left.png); }
-			&.icon-arrow-right { background-image: url(~/icons/icon-arrow-right.png); }
-			&.icon-arrow-up    { background-image: url(~/icons/icon-arrow-up.png); }
+			&:before {
+				content: "";
+				position: absolute;
+				top: 8px;
+				left: 8px;
+				width: 43px;
+				height: 43px;
+				background-position: 50% 50%;
+				background-size: 100% auto;
+				background-repeat: no-repeat;
+				filter: invert(1) drop-shadow(0 1px 1px rgba(#111,.45));
+			}
+
+			&:after {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: -5px;
+				border-radius: inherit;
+				background-image: radial-gradient(ellipse at bottom center, #fff7dc42, transparent);
+				pointer-events: none;
+				mix-blend-mode: plus-lighter;
+			}
+
+			&.icon-arrow-left:before  { background-image: url(~/icons/icon-arrow-left.png); }
+			&.icon-arrow-right:before { background-image: url(~/icons/icon-arrow-right.png); }
+			&.icon-arrow-up:before    { background-image: url(~/icons/icon-arrow-up.png); }
 
 			&.esc {
 				font-size: 29px;

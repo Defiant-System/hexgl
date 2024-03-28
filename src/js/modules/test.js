@@ -2,6 +2,9 @@
 let Test = {
 	init(APP) {
 		// return;
+
+		// setTimeout(() => APP.els.content.addClass("show-pre-game"), 100);
+
 		// setTimeout(() => APP.dispatch({ type: "replay-race" }), 100);
 		// setTimeout(() => karaqu.shell("win -a"), 300);
 
