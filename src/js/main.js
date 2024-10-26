@@ -188,12 +188,12 @@ const hexgl = {
 				game.stop();
 				break;
 			case "toggle-music":
-				value = window.midi.playing;
-				if (value) {
-					window.midi.stop();
-				} else {
-					window.midi.play("~/audio/beethoven.mid");
-				}
+				// value = window.midi.playing;
+				// if (value) {
+				// 	window.midi.stop();
+				// } else {
+				// 	window.midi.play("~/audio/beethoven.mid");
+				// }
 				// UI value
 				event.el.find("span").html(value ? "Off" : "On");
 				// update settings

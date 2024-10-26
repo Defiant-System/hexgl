@@ -1,6 +1,6 @@
 <Sounds>
-	<i id="crash" url="~/audio/crash.ogg"/>
-	<i id="destroyed" url="~/audio/destroyed.ogg"/>
-	<i id="boost" url="~/audio/boost.ogg"/>
-	<i id="wind" url="~/audio/wind.ogg"/>
+	<i id="crash" url="~/audio/crash.mp3"/>
+	<i id="destroyed" url="~/audio/destroyed.mp3"/>
+	<i id="boost" url="~/audio/boost.mp3"/>
+	<i id="wind" url="~/audio/wind.mp3"/>
 </Sounds>

@@ -97,6 +97,7 @@ content {
 			pointer-events: none;
 			background: url(~/img/bg.jpg) no-repeat 50% 50% fixed;
 			background-size: 105% auto;
+			filter: sepia(.7) saturate(1.2);
 			animation: animbg 3s 150ms ease-in-out infinite;
 		}
 
@@ -108,7 +109,7 @@ content {
 			left: 0;
 			z-index: 2;
 			pointer-events: none;
-			background: url(~/img/feisar.png) no-repeat 50% 0%;
+			background: url(~/icons/ship-feisar.png) no-repeat 50% 0%;
 			filter: drop-shadow(0 0 17px #fff);
 			background-size: 67% auto;
 			animation: anim 3s ease-in-out infinite;
@@ -124,7 +125,7 @@ content {
 			font-style: italic;
 			text-align: right;
 			line-height: .925;
-			pointer-events: none;
+			// pointer-events: none;
 			filter: drop-shadow(0 0 7px #fff);
 			z-index: 3;
 			// top: 270px;
@@ -133,20 +134,32 @@ content {
 			// font-size: 56px;
 
 			span {
-				background-image: -webkit-linear-gradient(90deg, #f9884d, #f44729);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				-webkit-text-stroke-width: 1px;
-				-webkit-text-stroke-color: #66666670;
-				display: inline-block;
-				padding-right: 11px;
+				&:nth-child(1) {
+					position: absolute;
+					display: inline-block;
+					width: 200px;
+					height: 50px;
+					font-size: 0;
+					background: url(~/icons/logo-hexgl.png) 50% 50%/contain no-repeat;
+					filter: drop-shadow(0 1px 0 hsl(155, 10%, 81%))
+							drop-shadow(0 2px 0 hsl(155, 10%, 79%))
+							drop-shadow(0 3px 0 hsl(155, 10%, 77%))
+							drop-shadow(0 1px 1px rgba(#222, .35));
+				}
 
 				&:nth-child(2) {
-					display: block;
-					font-size: 31px;
+					position: absolute;
+					top: 60px;
+					left: 79px;
+					width: 130px;
+					font-size: 25px;
 					background-image: -webkit-linear-gradient(90deg, #58b4d2, #3784b1);
-					// padding-right: 17px;
-					// font-size: 29px;
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					-webkit-text-stroke-width: 1px;
+					-webkit-text-stroke-color: #66666670;
+					display: inline-block;
+					padding-right: 11px;
 				}
 			}
 		}
